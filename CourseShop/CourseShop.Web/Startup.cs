@@ -10,12 +10,13 @@ namespace CourseShop.Web
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; set; }
+      public IConfiguration Configuration { get; set; }
 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -23,9 +24,10 @@ namespace CourseShop.Web
         {
             services.AddMvc();
 
+
             #region DataBase Context
 
-            services.AddDbContext<ApplicationContext>(options =>
+            services.AddDbContext<CourseShopContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("CourseShopConnection"));
             }
@@ -37,12 +39,13 @@ namespace CourseShop.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseStaticFiles();
+            app.UseMvcWithDefaultRoute();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
+
             app.Run(async (context) =>
             {
                 await context.Response.WriteAsync("Hello World!");

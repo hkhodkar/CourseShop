@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace CourseShop.DataLayer.Entity
+{
+    public class User
+    {
+        [Key]
+        public int UserId { get; set; }
+
+        [Display(Name = "نام کاربری")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Username { get; set; }
+
+        [Display(Name = "ایمیل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string Email { get; set; }
+
+        public bool IsActive { get; set; }
+
+        [Display(Name = "رمز عبور")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string PasswordHash { get; set; }
+
+        public DateTime RegisterDate { get; set; }
+
+        public string AvatarName { get; set; }
+
+        #region Relations
+
+        public List<UserRole> UserRoles { get; set; }
+
+        #endregion
+    }
+}
