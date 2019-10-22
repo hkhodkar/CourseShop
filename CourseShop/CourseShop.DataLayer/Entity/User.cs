@@ -21,12 +21,12 @@ namespace CourseShop.DataLayer.Entity
 
         public bool IsActive { get; set; }
 
-        [Display(Name = "رمز عبور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+
         public string PasswordHash { get; set; }
 
         public DateTime RegisterDate { get; set; }
+
+        public string ActivateCode { get; set; }
 
         public string AvatarName { get; set; }
 
