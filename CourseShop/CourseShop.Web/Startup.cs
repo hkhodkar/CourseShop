@@ -1,4 +1,7 @@
-﻿using CourseShop.DataLayer.Context;
+﻿using CourseShop.Core.Convertors;
+using CourseShop.Core.Interfaces;
+using CourseShop.Core.Services;
+using CourseShop.DataLayer.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +13,7 @@ namespace CourseShop.Web
 {
     public class Startup
     {
-      public IConfiguration Configuration { get; set; }
+        public IConfiguration Configuration { get; set; }
 
         public Startup(IConfiguration configuration)
         {
@@ -34,6 +37,14 @@ namespace CourseShop.Web
             );
 
             #endregion
+
+
+            #region IOC
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IViewRenderService, RenderViewToString>();
+
+            #endregion 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
