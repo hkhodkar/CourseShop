@@ -19,32 +19,18 @@
 
         <header><h2> عضویت در سایت </h2></header>
 
-        @if (ViewBag.IsSuccess == true)
-        {
-            <div class="alert alert-success">
-                <p class="help-text">
-                    @Model.Username عزیز ثبت نام با موفقیت انجام شد
-                </p>
-                <p class="help-text">
-                    ایمیلی حاوی لینک فعال سازی به @Model.Email ارسال گردید
-                </p>
-                <p class="help-text">
-                    لطفا از طریق لینک اقدام به فعال سازی نمایید
-                </p>
-            </div>
-        }
-
-
         @if (ViewBag.EmailIsTaken == true)
         {
-            <div>
-
+            <div class="alert alert-danger">
+                کاربری با ایمیل وارد شده قبلا در سیستم ثبت نام کرده است
             </div>
         }
 
         @if (ViewBag.UserIsTaken == true)
         {
-
+            <div class="alert alert-danger">
+                کاربری با نام کاربری وارد شده قبلا در سیستم ثبت نام کرده است
+            </div>
         }
 
         <div class="form-layer">

@@ -9,5 +9,9 @@ namespace CourseShop.Core.Interfaces
         bool UserIsExist(string username);
 
         bool EmailIsExist(string email);
+
+        User UserByActivateCode(string ActiveCode);
+
+        void UpdateUser(User user);
     }
 }

@@ -1,0 +1,30 @@
+﻿@model CourseShop.DataLayer.Entity.User
+
+@{
+    ViewData["Title"] = "فعال سازی اکانت";
+}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">فروشگاه دوره</a></li>
+            <li class="breadcrumb-item active" aria-current="page">فعال سازی اکانت</li>
+        </ul>
+    </nav>
+</div>
+
+<div class="container">
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success">
+            <h2 class="text-help">@Model.Username عزیز اکانت شما با موفقیت فعال گردید</h2>
+        </div>
+    }
+
+    @if (ViewBag.IsSuccess == false)
+    {
+        <div class="alert alert-danger">
+            <h2 class="text-help">کاربری با مشخصات  وارد شده یافت نشد</h2>
+        </div>
+    }
+
+</div>

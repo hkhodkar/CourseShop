@@ -1,0 +1,30 @@
+﻿@model CourseShop.Core.DTO.RegisterViewModel
+
+@{
+    ViewData["Title"] = "فروشگاه دوره";
+}
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/home">فروشگاه دوره </a></li>
+            <li class="breadcrumb-item active" aria-current="page">ثبت نام</li>
+        </ul>
+    </nav>
+</div>
+
+<div class="container">
+    <div class="alert alert-success">
+        <p class="help-text">
+            @Model.Username عزیز ثبت نام با موفقیت انجام شد
+        </p>
+        <p class="help-text">
+            ایمیلی حاوی لینک فعال سازی به @Model.Email ارسال گردید
+        </p>
+        <p class="help-text">
+            لطفا از طریق لینک اقدام به فعال سازی نمایید
+        </p>
+    </div>
+</div>
+
+
+

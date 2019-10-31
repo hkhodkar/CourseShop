@@ -28,12 +28,25 @@ namespace CourseShop.Core.Services
             return true;
         }
 
+
+
         public bool UserIsExist(string username)
         {
             var user = _context.Users.FirstOrDefault(u => u.Username == username);
             if (user == null) return false;
 
             return true;
+        }
+
+        public User UserByActivateCode(string ActiveCode)
+        {
+            return  _context.Users.FirstOrDefault(u => u.ActivateCode == ActiveCode);
+        }
+
+        public void UpdateUser(User user)
+        {
+            _context.Users.Update(user);
+            _context.SaveChanges();
         }
     }
 }

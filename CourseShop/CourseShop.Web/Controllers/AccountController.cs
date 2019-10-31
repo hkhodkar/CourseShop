@@ -88,7 +88,28 @@ namespace CourseShop.Web.Controllers
 
             ViewBag.IsSuccess = true;
 
-            return await Task.Run(() => View(viewModel));
+            return await Task.Run(() => View("SuccessfullRegistration", viewModel));
+        }
+
+        public IActionResult ActiveAccount(string Id)
+        {
+            var user = _userService.UserByActivateCode(Id);
+            if (user == null)
+            {
+                ViewBag.IsSuccess = false;
+                return View();
+            }
+            else
+            {
+                ViewBag.IsSuccess = true;
+                user.IsActive = true;
+                user.ActivateCode = NameGenerator.GenerateUniqCode();
+                _userService.UpdateUser(user);
+
+                return View(user);
+            }
+
+
         }
     }
 }
