@@ -1,6 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 
-namespace CourseShop.Core.DTO
+namespace CourseShop.Core.DTOs
 {
     public class RegisterViewModel
     {
@@ -68,4 +71,5 @@ namespace CourseShop.Core.DTO
 
         public string ActivateCode { get; set; }
     }
+
 }

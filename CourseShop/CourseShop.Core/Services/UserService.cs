@@ -1,9 +1,11 @@
 ﻿using CourseShop.Core.Convertors;
-using CourseShop.Core.DTO;
+using CourseShop.Core.DTOs;
+using CourseShop.Core.Generators;
 using CourseShop.Core.Interfaces;
 using CourseShop.Core.Security;
 using CourseShop.DataLayer.Context;
 using CourseShop.DataLayer.Entity;
+using System.IO;
 using System.Linq;
 
 namespace CourseShop.Core.Services
@@ -17,6 +19,7 @@ namespace CourseShop.Core.Services
             _context = context;
         }
 
+        #region Account
         public void AddUser(User user)
         {
             _context.Users.Add(user);
@@ -63,5 +66,92 @@ namespace CourseShop.Core.Services
         {
             return _context.Users.FirstOrDefault(u => u.Email == Email);
         }
+
+        public User GetUserById(int id)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserId == id);
+        }
+
+        public User GetUserByUserName(string username)
+        {
+            return _context.Users.FirstOrDefault(u => u.Username == username);
+        }
+
+        #endregion
+
+        #region UserPanel
+
+        public UserPanelViewModel GetUserInformation(string username)
+        {
+            return _context.Users
+                .Where(u => u.Username == username)
+                .Select(u => new UserPanelViewModel
+                {
+                    Username = u.Username,
+                    Email = u.Email,
+                    AvatarName = u.AvatarName,
+                    RegisterDate = u.RegisterDate
+                }).Single();
+        }
+
+        public EditProfileViewModel GetUserInfForEdit(string username)
+        {
+            return _context.Users.Where(u => u.Username == username)
+                .Select(u => new EditProfileViewModel
+                {
+                    AvatarName = u.AvatarName,
+                }).Single();
+        }
+
+        public void EditProfile(string username, EditProfileViewModel profile)
+        {
+            string imagePath = "";
+            if (profile.UserAvatar != null)
+            {
+                if (profile.AvatarName != "default.jpg")
+                {
+                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", profile.AvatarName);
+
+                    if (File.Exists(imagePath))
+                    {
+                        File.Delete(imagePath);
+                    }
+                }
+
+                profile.AvatarName = NameGenerator.GenerateUniqCode() + Path.GetExtension(profile.UserAvatar.FileName);
+                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", profile.AvatarName);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    profile.UserAvatar.CopyTo(stream);
+                }
+
+            }
+            var user = GetUserByUserName(username);
+            user.AvatarName = profile.AvatarName;
+            UpdateUser(user);
+        }
+
+        public bool ChangePassword(string username, ChangePasswordViewModel changePassword)
+        {
+            var user = GetUserByUserName(username);
+
+            var oldPassHash = PasswordHelper.EncodePasswordMd5(changePassword.OldPassword);
+
+            if (user.PasswordHash == oldPassHash)
+            {
+                var newPassHash = PasswordHelper.EncodePasswordMd5(changePassword.NewPassword);
+                user.PasswordHash = newPassHash;
+                UpdateUser(user);
+                return true;
+            } else
+            {
+                return false;
+
+            }
+        }
+
+
+
+        #endregion
     }
 }

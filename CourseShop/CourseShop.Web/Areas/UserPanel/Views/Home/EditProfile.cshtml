@@ -1,0 +1,74 @@
+﻿@model CourseShop.Core.DTOs.EditProfileViewModel
+
+@{
+    ViewData["Title"] = " ویرایش پنل کاربری ";
+}
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">فروشگاه دوره</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> ویرایش پنل کاربری </li>
+        </ul>
+    </nav>
+</div>
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <partial name="_Sidebar" />
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> ویرایش حساب کاربری </h1></header>
+                        <div class="inner form-layer">
+                            <form asp-controller="Home" asp-action="EditProfile" method="post" enctype="multipart/form-data">
+                                <input type="hidden" asp-for="AvatarName" />
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <img id="imgAvatar" class="thumbnail" src="/UserAvatar/@Model.AvatarName" />
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <label for="file-upload" class="custom-file-upload" style="width 80px">
+                                                <i class="zmdi zmdi-upload"></i>
+                                                <span class="text-help">آپلود عکس</span>
+                                            </label>
+                                            <input asp-for="UserAvatar" id="file-upload" type="file" style="display:none" />
+                                            <p>لطفا تصویری انتخاب کنید</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success"> ویرایش اطلاعات </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgAvatar').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file-upload").change(function () {
+        readURL(this);
+    });
+</script>

@@ -78,6 +78,15 @@ namespace CourseShop.Web
 
             app.UseStaticFiles();
             app.UseAuthentication();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                  name: "areas",
+                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+                routes.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
+            });
             app.UseMvcWithDefaultRoute();
 
             app.Run(async (context) =>

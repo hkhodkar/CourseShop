@@ -1,5 +1,5 @@
 ﻿using CourseShop.Core.Convertors;
-using CourseShop.Core.DTO;
+using CourseShop.Core.DTOs;
 using CourseShop.Core.Generators;
 using CourseShop.Core.Interfaces;
 using CourseShop.Core.Security;
@@ -48,6 +48,8 @@ namespace CourseShop.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel viewModel)
         {
+            if(!ModelState.IsValid) return await Task.Run(() => View(viewModel));
+
             var user = _userService.Login(viewModel);
             if (user != null)
             {
@@ -56,7 +58,8 @@ namespace CourseShop.Web.Controllers
                     var claims = new List<Claim>()
                     {
                         new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
-                        new Claim(ClaimTypes.Name,user.Username)
+                        new Claim(ClaimTypes.Name,user.Username),
+                        new Claim(ClaimTypes.Email,user.Email)
                     };
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     var principal = new ClaimsPrincipal(identity);
@@ -98,7 +101,7 @@ namespace CourseShop.Web.Controllers
         public async Task<IActionResult> Register(RegisterViewModel viewModel)
         {
             if (!ModelState.IsValid)
-                return await Task.Run(() => View());
+                return await Task.Run(() => View(viewModel));
 
             if (_userService.EmailIsExist(viewModel.Email))
             {
@@ -182,6 +185,9 @@ namespace CourseShop.Web.Controllers
         [Route("ForgotPassword")]
         public async Task<IActionResult> ForgottenPassword(ForgotPasswordViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+                return await Task.Run(() => View(viewModel));
+
             var email = FixedText.FixedEmail(viewModel.Email);
             var user = _userService.GetUserByEmail(email);
             if (user != null)
@@ -215,6 +221,9 @@ namespace CourseShop.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> RessetPassword(RessetPasswordViewModel viewModel)
         {
+            if (!ModelState.IsValid)
+                return await Task.Run(() => View(viewModel));
+
             var user = _userService.UserByActivateCode(viewModel.ActivateCode);
             if (user == null) return NotFound();
 

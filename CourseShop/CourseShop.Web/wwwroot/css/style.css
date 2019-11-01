@@ -551,7 +551,7 @@ main {
         .user-account .avatar-layer .img-layer img {
             width: 130px;
             height: 130px;
-            border: 3px solid #ecf1f8;
+            /*border: 3px solid #ecf1f8;*/
             z-index: 1;
             position: relative;
         }
@@ -1378,7 +1378,7 @@ main {
 
 .btn-success {
     color: #fff;
-    background-color: #1fab89;
+    background-color: #5cb85c;
     border-color: #1fab89
 }
 
@@ -1409,4 +1409,21 @@ select option:hover {
 
 .input-validation-error {
     border: 1px solid #fe8080;
+}
+
+.custom-file-upload {
+    background-color: #FF975B;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: white;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+ul > li {
+    cursor: pointer !important;
 }
