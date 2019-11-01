@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CourseShop.Web.Controllers
@@ -11,6 +8,13 @@ namespace CourseShop.Web.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult Test()
+        {
+            return Content("asd");
         }
     }
 }

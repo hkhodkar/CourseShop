@@ -1402,3 +1402,11 @@ select option:hover {
     box-shadow: none;
     background-color: #1fab89
 }
+
+.field-validation-error {
+    color: #fe8080 !important
+}
+
+.input-validation-error {
+    border: 1px solid #fe8080;
+}

@@ -1,4 +1,5 @@
-﻿using CourseShop.DataLayer.Entity;
+﻿using CourseShop.Core.DTO;
+using CourseShop.DataLayer.Entity;
 
 namespace CourseShop.Core.Interfaces
 {
@@ -13,5 +14,10 @@ namespace CourseShop.Core.Interfaces
         User UserByActivateCode(string ActiveCode);
 
         void UpdateUser(User user);
+
+        User Login(LoginViewModel viewModel);
+
+        User GetUserByEmail(string Email);
+
     }
 }

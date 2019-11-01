@@ -5,8 +5,12 @@ using CourseShop.Core.Interfaces;
 using CourseShop.Core.Security;
 using CourseShop.Core.Senders;
 using CourseShop.DataLayer.Entity;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CourseShop.Web.Controllers
@@ -16,7 +20,7 @@ namespace CourseShop.Web.Controllers
         /// <summary>
         /// Author : hatef khodkar
         /// Created Date : 21/10/2019
-        /// Last Update : 21/10/2019
+        /// Last Update : 1/11/2019
         /// </summary>
         /// <returns></returns>
 
@@ -30,17 +34,58 @@ namespace CourseShop.Web.Controllers
             _userService = userService;
         }
 
-        public IActionResult Index()
+
+        #region Login
+        [Route("Login")]
+        [HttpGet]
+        public async Task<IActionResult> Login()
         {
-            return View();
+            return await Task.Run(() => View());
         }
+
 
         [Route("Login")]
-        public IActionResult Login()
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel viewModel)
         {
-            return View();
+            var user = _userService.Login(viewModel);
+            if (user != null)
+            {
+                if (user.IsActive == true)
+                {
+                    var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
+                        new Claim(ClaimTypes.Name,user.Username)
+                    };
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    var properties = new AuthenticationProperties
+                    {
+                        IsPersistent = viewModel.RememberMe
+                    };
+                    await HttpContext.SignInAsync(principal, properties);
+                    ViewBag.IsSuccess = true;
+                    return await Task.Run(() => View());
+                }
+                else
+                {
+                    ViewBag.IsNotActivate = true;
+                    return await Task.Run(() => View(viewModel));
+                }
+
+            }
+            else
+            {
+                ViewBag.IsSuccess = false;
+                return await Task.Run(() => View(viewModel));
+            }
         }
 
+        #endregion
+
+        #region Register
         [Route("Register")]
         [HttpGet]
         public async Task<IActionResult> Register()
@@ -111,5 +156,77 @@ namespace CourseShop.Web.Controllers
 
 
         }
+        #endregion
+
+        #region logout
+        [HttpGet]
+        [Route("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return await Task.Run(() => Redirect("/"));
+        }
+
+        #endregion
+
+        #region ForgotPassword
+
+        [HttpGet]
+        [Route("ForgotPassword")]
+        public async Task<IActionResult> ForgottenPassword()
+        {
+            return await Task.Run(() => View());
+        }
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public async Task<IActionResult> ForgottenPassword(ForgotPasswordViewModel viewModel)
+        {
+            var email = FixedText.FixedEmail(viewModel.Email);
+            var user = _userService.GetUserByEmail(email);
+            if (user != null)
+            {
+                var body = _renderView.RenderToStringAsync("_ForgotEmail", user);
+                SendEmail.Send(user.Email, "بازیابی کلمه عبور", body);
+                ViewBag.IsSuccess = true;
+            }
+            else
+            {
+                ViewBag.IsSuccess = false;
+            }
+            return await Task.Run(() => View(viewModel));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RessetPassword(string id)
+        {
+            var user = _userService.UserByActivateCode(id);
+            if (user == null) return View("ExpiredLink");
+
+            return await Task.Run(() => View(
+                new RessetPasswordViewModel
+                {
+                    ActivateCode = id
+                }
+                ));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RessetPassword(RessetPasswordViewModel viewModel)
+        {
+            var user = _userService.UserByActivateCode(viewModel.ActivateCode);
+            if (user == null) return NotFound();
+
+            var passHash = PasswordHelper.EncodePasswordMd5(viewModel.Password);
+
+            user.PasswordHash = passHash;
+            user.ActivateCode = NameGenerator.GenerateUniqCode();
+            _userService.UpdateUser(user);
+            ViewBag.IsSuccess = true;
+            return await Task.Run(() => View());
+        }
+        #endregion
+
     }
 }
