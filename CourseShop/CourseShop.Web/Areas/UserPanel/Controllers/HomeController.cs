@@ -20,15 +20,22 @@ namespace CourseShop.Web.Areas.UserPanel.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly IWalletService _walletService;
 
-        public HomeController(IUserService userService)
+        public HomeController(
+            IUserService userService,
+            IWalletService walletService)
         {
             _userService = userService;
+            _walletService = walletService;
         }
 
         public async Task<IActionResult> Index()
         {
             var user = _userService.GetUserInformation(User.Identity.Name);
+            var userId = _userService.GetUserIdByUserName(User.Identity.Name);
+            ViewBag.Balance = _walletService.WallateBalance(userId);
+
             return await Task.Run(() => View(user));
         }
 

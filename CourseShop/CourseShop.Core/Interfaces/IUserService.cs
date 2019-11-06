@@ -21,6 +21,9 @@ namespace CourseShop.Core.Interfaces
         User GetUserByEmail(string Email);
 
         User GetUserById(int id);
+
+        int GetUserIdByUserName(string username);
+
         #endregion
 
         #region UserPanel

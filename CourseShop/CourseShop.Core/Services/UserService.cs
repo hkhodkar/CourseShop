@@ -77,6 +77,12 @@ namespace CourseShop.Core.Services
             return _context.Users.FirstOrDefault(u => u.Username == username);
         }
 
+
+        public int GetUserIdByUserName(string username)
+        {
+            return _context.Users.Where(u => u.Username == username).Select(u => u.UserId).Single();
+        }
+
         #endregion
 
         #region UserPanel
@@ -143,12 +149,14 @@ namespace CourseShop.Core.Services
                 user.PasswordHash = newPassHash;
                 UpdateUser(user);
                 return true;
-            } else
+            }
+            else
             {
                 return false;
 
             }
         }
+
 
 
 

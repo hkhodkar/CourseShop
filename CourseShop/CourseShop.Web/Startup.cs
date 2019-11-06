@@ -45,6 +45,7 @@ namespace CourseShop.Web
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IViewRenderService, RenderViewToString>();
+            services.AddTransient<IWalletService, WalletService>();
 
             #endregion
 

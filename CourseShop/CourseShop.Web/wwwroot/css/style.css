@@ -1414,7 +1414,7 @@ select option:hover {
 .custom-file-upload {
     background-color: #FF975B;
     display: inline-block;
-    padding: 6px 12px;
+    padding: 6px;
     cursor: pointer;
     color: white;
     border-radius: 5px;
@@ -1426,4 +1426,16 @@ select option:hover {
 
 ul > li {
     cursor: pointer !important;
+}
+
+.text-success {
+    color: #5cb85c !important;
+}
+
+.text-danger {
+    color: #fe8080 !important;
+}
+
+table > td:hover{
+    cursor:pointer !important;
 }

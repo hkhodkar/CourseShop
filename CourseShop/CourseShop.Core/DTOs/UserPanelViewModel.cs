@@ -52,4 +52,6 @@ namespace CourseShop.Core.DTOs
         public string Repassword { get; set; }
 
     }
+
+
 }

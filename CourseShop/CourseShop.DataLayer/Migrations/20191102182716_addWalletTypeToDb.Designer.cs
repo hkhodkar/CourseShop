@@ -4,14 +4,16 @@ using CourseShop.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseShop.DataLayer.Migrations
 {
     [DbContext(typeof(CourseShopContext))]
-    partial class CourseShopContextModelSnapshot : ModelSnapshot
+    [Migration("20191102182716_addWalletTypeToDb")]
+    partial class addWalletTypeToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,34 +84,6 @@ namespace CourseShop.DataLayer.Migrations
                     b.ToTable("UserRoles");
                 });
 
-            modelBuilder.Entity("CourseShop.DataLayer.Entity.Wallet", b =>
-                {
-                    b.Property<int>("WalletId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount");
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500);
-
-                    b.Property<bool>("IsPay");
-
-                    b.Property<int>("TypeId");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("WalletId");
-
-                    b.HasIndex("TypeId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Wallets");
-                });
-
             modelBuilder.Entity("CourseShop.DataLayer.Entity.WalletType", b =>
                 {
                     b.Property<int>("TypeId");
@@ -144,19 +118,6 @@ namespace CourseShop.DataLayer.Migrations
 
                     b.HasOne("CourseShop.DataLayer.Entity.User", "User")
                         .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CourseShop.DataLayer.Entity.Wallet", b =>
-                {
-                    b.HasOne("CourseShop.DataLayer.Entity.WalletType", "WalletType")
-                        .WithMany("Wallets")
-                        .HasForeignKey("TypeId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CourseShop.DataLayer.Entity.User", "User")
-                        .WithMany("Wallets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

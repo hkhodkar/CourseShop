@@ -1,0 +1,21 @@
+﻿@model CourseShop.Core.DTOs.CaharegeWalletViewModel
+
+<form method="post"
+      data-ajax="true"
+      data-ajax-method="post"
+      data-ajax-complete="completed">
+    <div class="row">
+        <div class="col-md-7 col-sm-8 col-xs-12">
+            <div class="input-group">
+                <span class="input-group-addon" id="username"><i class="zmdi zmdi-balance-wallet"></i></span>
+                <input type="number" class="form-control" asp-for="Amount" placeholder="مبلغ شارژ">
+            </div>
+        </div>
+        <span asp-validation-for="Amount"></span>
+    </div>
+</form>
+<script>
+    var completed = function () {
+        $.get("UserPanel/wallet/LoadWalletTable")
+    }
+</script>
