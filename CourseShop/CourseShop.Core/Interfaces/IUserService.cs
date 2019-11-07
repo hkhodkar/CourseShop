@@ -20,6 +20,8 @@ namespace CourseShop.Core.Interfaces
 
         User GetUserByEmail(string Email);
 
+        User GetUserByUsername(string username);
+
         User GetUserById(int id);
 
         int GetUserIdByUserName(string username);

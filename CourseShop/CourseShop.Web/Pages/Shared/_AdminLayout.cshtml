@@ -1,0 +1,145 @@
+﻿@using CourseShop.Core.Interfaces
+
+@inject IUserService _userService;
+
+@{
+    var user = _userService.GetUserByUsername(User.Identity.Name);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <partial name="_Partial_MetaTags" />
+    <partial name="_Partial_Styles" />
+</head>
+<body class="hold-transition sidebar-mini skin-yellow-light">
+    <div>
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="/admin" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>فروشگاه دوره</b></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+                        <li class="dropdown user user-menu ">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <img src="/UserAvatar/@user.AvatarName" class="user-image" alt="User Image">
+                                <span class="hidden-xs">@User.Identity.Name</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="/UserAvatar/default.jpg" class="img-circle" alt="User Image">
+
+                                    <p style="color:black">
+                                        @User.Identity.Name
+                                        <small>مدیریت کل سایت</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-info">پروفایل</a>
+                                    </div>
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-warning">خروج</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- Control Sidebar Toggle Button -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- right side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-right image">
+                        <img src="/UserAvatar/@user.AvatarName" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-right info">
+                        <p> @User.Identity.Name  </p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> آنلاین</a>
+                    </div>
+                </div>
+                <!-- search form -->
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="جستجو">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+                <!-- /.search form -->
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-user"></i>
+                            <span>مدیریت کاربران</span>
+                            <span class="pull-left-container">
+                                <i class="fa fa-angle-right pull-left"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#">دسترسی ها</a></li>
+                            <li><a href="#">کاربران</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-th"></i>
+                            <span>
+                                کاربران حذف شده
+                            </span>
+                        </a>
+                    </li>
+                    @*<li>
+                            <a href="#">
+                                <i class="fa fa-trash-o"></i>
+                                کاربران حذف شده
+                            </a>
+                        </li>*@
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+        @RenderBody();
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>
+        </aside>
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+             immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <partial name="_Partial_ButtomScripts" />
+</body>
+</html>
+

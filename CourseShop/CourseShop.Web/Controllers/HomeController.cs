@@ -6,6 +6,14 @@ namespace CourseShop.Web.Controllers
 {
     public class HomeController : Controller
     {
+        /// <summary>
+        /// Author : hatef khodkar
+        /// Created Date : 21/10/2019
+        /// Last Update : 21/10/2019
+        /// </summary>
+        /// <returns></returns>
+        /// 
+
         private readonly IUserService _userService;
         private readonly IWalletService _walletService;
 

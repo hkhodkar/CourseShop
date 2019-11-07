@@ -157,6 +157,11 @@ namespace CourseShop.Core.Services
             }
         }
 
+        public User GetUserByUsername(string username)
+        {
+            return _context.Users.FirstOrDefault(u => u.Username == username);
+        }
+
 
 
 

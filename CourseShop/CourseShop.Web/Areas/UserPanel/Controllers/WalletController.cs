@@ -1,13 +1,23 @@
 ﻿using CourseShop.Core.DTOs;
 using CourseShop.Core.Interfaces;
 using CourseShop.DataLayer.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
 namespace CourseShop.Web.Areas.UserPanel.Controllers
 {
+
+    /// <summary>
+    /// Author : hatef khodkar
+    /// Created Date : 04/11/2019
+    /// Last Update : 04/11/2019
+    /// </summary>
+    /// <returns></returns>
+    /// 
     [Area("UserPanel")]
+    [Authorize]
     public class WalletController : Controller
     {
         private readonly IUserService _userService;
