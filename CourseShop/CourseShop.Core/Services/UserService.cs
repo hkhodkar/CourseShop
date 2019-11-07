@@ -5,6 +5,7 @@ using CourseShop.Core.Interfaces;
 using CourseShop.Core.Security;
 using CourseShop.DataLayer.Context;
 using CourseShop.DataLayer.Entity;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -33,8 +34,6 @@ namespace CourseShop.Core.Services
 
             return true;
         }
-
-
 
         public bool UserIsExist(string username)
         {
@@ -162,8 +161,13 @@ namespace CourseShop.Core.Services
             return _context.Users.FirstOrDefault(u => u.Username == username);
         }
 
+        #endregion
 
-
+        #region AdminPanel
+        public IList<User> GetUsersList()
+        {
+            return _context.Users.ToList();
+        }
 
         #endregion
     }

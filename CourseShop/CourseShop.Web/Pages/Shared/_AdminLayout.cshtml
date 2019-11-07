@@ -100,8 +100,8 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="/Admin/users">کاربران</a></li>
                             <li><a href="#">دسترسی ها</a></li>
-                            <li><a href="#">کاربران</a></li>
 
                         </ul>
                     </li>
@@ -124,8 +124,9 @@
             <!-- /.sidebar -->
         </aside>
         <!-- Content Wrapper. Contains page content -->
-        @RenderBody();
-
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
@@ -136,7 +137,7 @@
         </aside>
         <!-- /.control-sidebar -->
         <!-- Add the sidebar's background. This div must be placed
-             immediately after the control sidebar -->
+         immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
     <partial name="_Partial_ButtomScripts" />

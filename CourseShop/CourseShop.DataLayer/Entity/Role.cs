@@ -13,10 +13,12 @@ namespace CourseShop.DataLayer.Entity
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string RoleTitle { get; set; }
 
+        public bool IsDeleted { get; set; }
 
         #region UserRole
 
         public List<UserRole> UserRoles { get; set; }
+
 
         #endregion
 

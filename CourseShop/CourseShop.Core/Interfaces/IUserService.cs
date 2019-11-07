@@ -1,5 +1,6 @@
 ﻿using CourseShop.Core.DTOs;
 using CourseShop.DataLayer.Entity;
+using System.Collections.Generic;
 
 namespace CourseShop.Core.Interfaces
 {
@@ -26,6 +27,9 @@ namespace CourseShop.Core.Interfaces
 
         int GetUserIdByUserName(string username);
 
+
+
+
         #endregion
 
         #region UserPanel
@@ -37,6 +41,10 @@ namespace CourseShop.Core.Interfaces
         void EditProfile(string username, EditProfileViewModel profile);
         bool ChangePassword(string username, ChangePasswordViewModel changePassword);
 
+        #endregion
+
+        #region AdminPanel
+        IList<User> GetUsersList();
         #endregion
 
     }
