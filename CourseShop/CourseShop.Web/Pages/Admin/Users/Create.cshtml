@@ -4,91 +4,99 @@
     ViewData["Title"] = "Create";
 }
 <section class="content">
+    <form method="post" enctype="multipart/form-data">
 
-    <div class="row">
-        <div class="col-sm-12 col-md-8">
+        <div class="row">
 
-            <div class="box box-warning">
-                <div class="box-header ui-sortable-handle" style="cursor: move;">
-                    <i class="fa fa-user"></i>
+            <div class="col-sm-12 col-md-8">
 
-                    <h3 class="box-title">ثبت کاربر</h3>
-                </div>
-                <div class="box-body">
-                    <form action="#" method="post">
+                <div class="box box-warning">
+                    <div class="box-header ui-sortable-handle" style="cursor: move;">
+                        <i class="fa fa-user"></i>
+
+                        <h3 class="box-title">ثبت کاربر</h3>
+                    </div>
+                    <div class="box-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" name="emailto" placeholder="نام کاربری">
+                            <input asp-for="CreateUserViewModel.Username" type="text" class="form-control"  placeholder="نام کاربری">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" name="subject" placeholder="ایمیل">
+                            <input asp-for="CreateUserViewModel.Email" type="email" class="form-control" placeholder="ایمیل">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="رمز عبور" />
+                            <input asp-for="CreateUserViewModel.Password" type="password" class="form-control" placeholder="رمز عبور" />
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="تکرار رمز عبور" />
+                            <input asp-for="CreateUserViewModel.Repassword" type="password" class="form-control" placeholder="تکرار رمز عبور" />
                         </div>
-                    </form>
-                </div>
-                <div class="box-footer clearfix">
-                    <button type="button" class=" btn btn-success" >
-                            ثبت کاربر
-                    </button>
+                        <div class="box-footer clearfix">
+                            <button type="submit" class=" btn btn-success">
+                                ثبت کاربر
+                            </button>
+                        </div>
+
+                    </div>
+                    @*<div class="box-footer clearfix">
+                            <button type="submit" class=" btn btn-success" >
+                                    ثبت کاربر
+                            </button>
+                        </div>*@
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-4">
 
-            <div class="box box-info box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">تصویر کاربر</h3>
-                    <!-- /.box-tools -->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-7 col-sm-8 col-xs-12" style="padding:8px">
-                            <img id="imgAvatar" class="img-thumbnail" style="padding-bottom:8px" src="/UserAvatar/09d82ac22d324752b1d4d2b023d7a256.jpg">
-                        </div>
-                        <div class="col-md-7 col-sm-8 col-xs-12">
-                            <div class="input-group">
-                                <label for="file-upload" class="custom-file-upload" style="width : 80px">
-                                    <i class="zmdi zmdi-upload"></i>
-                                    <span>آپلود عکس</span>
-                                </label>
-                                <input id="file-upload" type="file" style="display:none" name="UserAvatar">
-                                <p>لطفا تصویری انتخاب کنید</p>
+                <div class="box box-info box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">تصویر کاربر</h3>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-7 col-sm-8 col-xs-12" style="padding:8px">
+                                <img id="imgAvatar" class="img-thumbnail" style="padding-bottom:8px" src="/UserAvatar/default.jpg">
+                            </div>
+                            <div class="col-md-7 col-sm-8 col-xs-12">
+                                <div class="input-group">
+                                    <label for="file-upload" class="custom-file-upload" style="width : 80px">
+                                        <i class="zmdi zmdi-upload"></i>
+                                        <span>آپلود عکس</span>
+                                    </label>
+                                    <input asp-for="CreateUserViewModel.UserAvatar" id="file-upload" type="file" style="display:none" >
+                                    <p>لطفا تصویری انتخاب کنید</p>
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-8 col-xs-12">
                             </div>
                         </div>
-                        <div class="col-md-7 col-sm-8 col-xs-12">
-                        </div>
                     </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-12 col-md-8">
-        </div>
-        <div class="col-sm-12 col-md-4">
-            <div class="box box-success box-solid">
-                <div class="box-header with-border">
-                    <h3 class="box-title">نقش های کاربر</h3>
-                    <!-- /.box-tools -->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    @foreach (var item in Model.RolesList)
-                    {
-                        <label>@item.RoleTitle</label>
-                        <input type="checkbox" />
-                    }
-                </div>
                     <!-- /.box-body -->
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="box box-success box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">نقش های کاربر</h3>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @foreach (var item in Model.RolesList)
+                        {
+                            <label>@item.RoleTitle</label>
+                            <input name="Roles" type="checkbox" value="@item.RoleId" />
+                        }
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </form>
+
 </section>
 
 <script src="/js/jquery.min.js"></script>

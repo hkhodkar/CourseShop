@@ -35,5 +35,7 @@ namespace CourseShop.Core.DTOs
         public string AvatarName { get; set; }
 
         public IFormFile UserAvatar { get; set; }
+
+        public List<int> Roles { get; set; }
     }
 }
