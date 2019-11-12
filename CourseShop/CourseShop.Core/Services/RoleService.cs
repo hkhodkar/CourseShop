@@ -22,5 +22,16 @@ namespace CourseShop.Core.Services
             return _context.Roles.ToList();
         }
 
+        public void AddUserRole(int userId , int roleId)
+        {
+            UserRole userRole = new UserRole
+            {
+                RoleId = roleId,
+                UserId = userId
+            };
+            _context.UserRoles.Add(userRole);
+            _context.SaveChanges();
+        }
+
     }
 }

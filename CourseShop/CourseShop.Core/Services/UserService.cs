@@ -5,9 +5,11 @@ using CourseShop.Core.Interfaces;
 using CourseShop.Core.Security;
 using CourseShop.DataLayer.Context;
 using CourseShop.DataLayer.Entity;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CourseShop.Core.Services
 {
@@ -168,6 +170,36 @@ namespace CourseShop.Core.Services
         {
             return _context.Users.ToList();
         }
+
+        public async Task<int> AddUserInAdminPanel(CreateUserForAdminViewModel user)
+        {
+            string imagePath = "";
+            if (user.UserAvatar != null)
+            {
+                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar",user.AvatarName);
+                user.AvatarName = NameGenerator.GenerateUniqCode() + Path.GetExtension(user.UserAvatar.FileName);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    user.UserAvatar.CopyTo(stream);
+                }
+            }
+
+            User newUser = new User
+            {
+                ActivateCode = NameGenerator.GenerateUniqCode(),
+                AvatarName = user.AvatarName,
+                Email = FixedText.FixedEmail(user.Email),
+                IsActive = true,
+                PasswordHash = PasswordHelper.EncodePasswordMd5(user.Password),
+                RegisterDate = DateTime.Now,
+                Username = user.Username,
+            };
+            _context.Users.Add(newUser);
+            await _context.SaveChangesAsync();
+            return await Task.Run(() => newUser.UserId);
+        }
+
+
 
         #endregion
     }

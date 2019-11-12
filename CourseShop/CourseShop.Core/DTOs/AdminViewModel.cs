@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CourseShop.Core.DTOs
 {
-   public class CreateUserForAdmin
+   public class CreateUserForAdminViewModel
     {
         [Display(Name = "نام کاربری")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]

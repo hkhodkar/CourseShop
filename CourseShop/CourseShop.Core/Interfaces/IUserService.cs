@@ -1,6 +1,7 @@
 ﻿using CourseShop.Core.DTOs;
 using CourseShop.DataLayer.Entity;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CourseShop.Core.Interfaces
 {
@@ -45,6 +46,7 @@ namespace CourseShop.Core.Interfaces
 
         #region AdminPanel
         IList<User> GetUsersList();
+        Task<int> AddUserInAdminPanel(CreateUserForAdminViewModel user);
         #endregion
 
     }

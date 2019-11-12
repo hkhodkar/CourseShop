@@ -45,6 +45,19 @@ namespace CourseShop.DataLayer.Context
                         TypeTitle = "برداشت"
                     }
                 );
+
+            modelBuilder.Entity<Role>()
+                .HasData(
+                new Role
+                {
+                    RoleId = 1,
+                    RoleTitle = "مدیر سایت"
+                },
+                 new Role
+                 {
+                     RoleId = 2,
+                     RoleTitle = "استاد"
+                 });
         }
     }
 }
