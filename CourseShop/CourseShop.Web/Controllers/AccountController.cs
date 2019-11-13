@@ -121,7 +121,7 @@ namespace CourseShop.Web.Controllers
                 Username = viewModel.Username,
                 Email = FixedText.FixedEmail(viewModel.Email),
                 ActivateCode = NameGenerator.GenerateUniqCode(),
-                AvatarName = "default.jpg",
+                UserAvatar = "default.jpg",
                 IsActive = false,
                 PasswordHash = PasswordHelper.EncodePasswordMd5(viewModel.Password),
                 RegisterDate = DateTime.Now

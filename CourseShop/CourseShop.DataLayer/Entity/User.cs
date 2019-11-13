@@ -28,7 +28,7 @@ namespace CourseShop.DataLayer.Entity
 
         public string ActivateCode { get; set; }
 
-        public string AvatarName { get; set; }
+        public string UserAvatar { get; set; }
 
         #region Relations
 
