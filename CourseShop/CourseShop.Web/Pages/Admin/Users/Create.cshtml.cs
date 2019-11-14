@@ -22,7 +22,7 @@ namespace CourseShop.Web.Pages.Admin.Users
         }
 
         [BindProperty]
-        public CreateUserForAdminViewModel CreateUserViewModel { get; set; }
+        public UserForAdminViewModel CreateUserViewModel { get; set; }
         public List<Role> RolesList { get; set; }
 
         public void OnGet()

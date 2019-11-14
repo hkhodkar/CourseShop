@@ -51,7 +51,7 @@ namespace CourseShop.Web.Controllers
         {
             if(!ModelState.IsValid) return await Task.Run(() => View(viewModel));
 
-            var user = _userService.Login(viewModel);
+            var user = await _userService.Login(viewModel);
             if (user != null)
             {
                 if (user.IsActive == true)

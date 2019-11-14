@@ -18,7 +18,7 @@ namespace CourseShop.Core.Interfaces
 
         void UpdateUser(User user);
 
-        User Login(LoginViewModel viewModel);
+        Task<User> Login(LoginViewModel viewModel);
 
         User GetUserByEmail(string Email);
 
@@ -45,8 +45,15 @@ namespace CourseShop.Core.Interfaces
         #endregion
 
         #region AdminPanel
+
         IList<User> GetUsersList();
-        Task<int> AddUserInAdminPanel(CreateUserForAdminViewModel user);
+
+        Task<int> AddUserInAdminPanel(UserForAdminViewModel user);
+
+        Task<UserForAdminViewModel> GetUserForEditMode(int id);
+
+        Task<int> EditUserAdminPanel(UserForAdminViewModel user);
+
         #endregion
 
     }

@@ -7,5 +7,7 @@ namespace CourseShop.Core.Interfaces
     {
         List<Role> GetRolesList();
         void AddUserRole(int userId, int roleId);
+        void UpdateUserRoles(int userId, List<int> roles);
+
     }
 }

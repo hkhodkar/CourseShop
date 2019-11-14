@@ -5,6 +5,7 @@ using CourseShop.Core.Interfaces;
 using CourseShop.Core.Security;
 using CourseShop.DataLayer.Context;
 using CourseShop.DataLayer.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -56,11 +57,12 @@ namespace CourseShop.Core.Services
             _context.SaveChanges();
         }
 
-        public User Login(LoginViewModel login)
+        public async Task<User> Login(LoginViewModel login)
         {
             string hashPassword = PasswordHelper.EncodePasswordMd5(login.Password);
             string email = FixedText.FixedEmail(login.Email);
-            return _context.Users.SingleOrDefault(u => u.Email == email && u.PasswordHash == hashPassword);
+            var user = await _context.Users.SingleOrDefaultAsync(u => u.Email == email && u.PasswordHash == hashPassword);
+            return user;
         }
 
         public User GetUserByEmail(string Email)
@@ -171,7 +173,7 @@ namespace CourseShop.Core.Services
             return _context.Users.ToList();
         }
 
-        public async Task<int> AddUserInAdminPanel(CreateUserForAdminViewModel user)
+        public async Task<int> AddUserInAdminPanel(UserForAdminViewModel user)
         {
             User newUser = new User
             {
@@ -183,21 +185,89 @@ namespace CourseShop.Core.Services
                 Username = user.Username,
             };
 
+            #region Upload Image
             if (user.UserAvatar != null)
             {
                 string imagePath = "";
-                newUser.UserAvatar = NameGenerator.GenerateUniqCode() + Path.GetExtension(user.UserAvatar.FileName); 
+                newUser.UserAvatar = NameGenerator.GenerateUniqCode() + Path.GetExtension(user.UserAvatar.FileName);
                 imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", newUser.UserAvatar);
                 using (var stream = new FileStream(imagePath, FileMode.Create))
                 {
                     user.UserAvatar.CopyTo(stream);
                 }
             }
+            #endregion
 
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
             return await Task.Run(() => newUser.UserId);
+        }
+
+        public async Task<UserForAdminViewModel> GetUserForEditMode(int id)
+        {
+            var user = GetUserById(id);
+
+            return await _context.Users
+                .Where(u => u.UserId == id)
+                .Select(u => new UserForAdminViewModel
+                {
+                    Id = u.UserId,
+                    AvatarName = u.UserAvatar,
+                    Username = u.Username,
+                    Email = u.Email,
+                    RegisterDate = u.RegisterDate,
+                    IsActivate = u.IsActive,
+                    Roles = _context
+                    .UserRoles.Where(r => r.UserId == id)
+                    .Select(r => r.RoleId)
+                    .ToList()
+                }).SingleOrDefaultAsync();
+        }
+
+        public async Task<int> EditUserAdminPanel(UserForAdminViewModel user)
+        {
+            var UpdateUser = _context.Users.SingleOrDefault(u => u.UserId == user.Id);
+
+            UpdateUser.UserId = user.Id;
+            UpdateUser.Email = user.Email;
+            UpdateUser.Username = user.Username;
+            if (!string.IsNullOrEmpty(user.Password))
+            {
+                UpdateUser.PasswordHash = PasswordHelper.EncodePasswordMd5(user.Password);
+            }
+            UpdateUser.IsActive = user.IsActivate;
+            UpdateUser.IsDeleted = false;
+            UpdateUser.ActivateCode = NameGenerator.GenerateUniqCode();
+
+
+            #region UploadImage
+            if (user.UserAvatar != null)
+            {
+                string imagePath = "";
+
+                if (user.AvatarName != "default.jpg")
+                {
+                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", user.AvatarName);
+                    if (File.Exists(imagePath))
+                    {
+                        File.Delete(imagePath);
+                    }
+                }
+
+                UpdateUser.UserAvatar = NameGenerator.GenerateUniqCode() + Path.GetExtension(user.UserAvatar.FileName);
+                imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/UserAvatar", UpdateUser.UserAvatar);
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    user.UserAvatar.CopyTo(stream);
+                }
+            }
+
+            _context.Users.Update(UpdateUser);
+            await _context.SaveChangesAsync();
+            return UpdateUser.UserId;
+
+            #endregion
         }
 
 

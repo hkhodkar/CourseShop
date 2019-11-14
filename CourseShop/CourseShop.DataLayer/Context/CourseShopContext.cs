@@ -30,7 +30,7 @@ namespace CourseShop.DataLayer.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsActive);
+            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsDeleted == false );
 
             modelBuilder.Entity<WalletType>()
                 .HasData(

@@ -1,18 +1,17 @@
-﻿@page
-@model CourseShop.Web.Pages.Admin.Users.CreateModel
+﻿@page "{id}"
+@model CourseShop.Web.Pages.Admin.Users.EditUserModel
 @{
-    ViewData["Title"] = "افزودن کاربر جدید";
+    ViewData["Title"] = "ویرایش کاربر";
 }
 
 <section class="content-header">
     <h3>
         <ul class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> پنل مدیریت </a></li>
-            <li class="active">افزودن کاربر جدید</li>
+            <li class="active">ویرایش جدید</li>
         </ul>
     </h3>
 </section>
-
 
 <section class="content">
     <form method="post" enctype="multipart/form-data">
@@ -25,29 +24,32 @@
                     <div class="box-header ui-sortable-handle" style="cursor: move;">
                         <i class="fa fa-user"></i>
 
-                        <h3 class="box-title">ثبت کاربر</h3>
+                        <h3 class="box-title">ویرایش کاربر</h3>
                     </div>
                     <div class="box-body">
+                        <input asp-for="UserViewModel.Id" type="hidden" />
+                        <input asp-for="UserViewModel.AvatarName" type="hidden" />
+
                         <div class="form-group">
-                            <input asp-for="CreateUserViewModel.Username" type="text" class="form-control" placeholder="نام کاربری">
-                            <span asp-validation-for="CreateUserViewModel.Username"></span>
+                            <input asp-for="UserViewModel.Username" type="text" class="form-control" placeholder="نام کاربری">
+                            <span asp-validation-for="UserViewModel.Username"></span>
                         </div>
                         <div class="form-group">
-                            <input asp-for="CreateUserViewModel.Email" type="email" class="form-control" placeholder="ایمیل">
-                            <span asp-validation-for="CreateUserViewModel.Email"></span>
+                            <input asp-for="UserViewModel.Email" type="email" class="form-control" placeholder="ایمیل">
+                            <span asp-validation-for="UserViewModel.Email"></span>
                         </div>
                         <div class="form-group">
-                            <input asp-for="CreateUserViewModel.Password" type="password" class="form-control" placeholder="رمز عبور" />
-                            <span asp-validation-for="CreateUserViewModel.Password"></span>
+                            <input asp-for="UserViewModel.Password" type="password" class="form-control" placeholder="رمز عبور" />
+                            <span asp-validation-for="UserViewModel.Password"></span>
                         </div>
                         <div class="form-group">
-                            <input asp-for="CreateUserViewModel.Repassword" type="password" class="form-control" placeholder="تکرار رمز عبور" />
-                            <span asp-validation-for="CreateUserViewModel.Repassword"></span>
+                            <input asp-for="UserViewModel.Repassword" type="password" class="form-control" placeholder="تکرار رمز عبور" />
+                            <span asp-validation-for="UserViewModel.Repassword"></span>
                         </div>
                         <div class="form-group">
                             <p>وضعیت کاربر</p>
-                            <input type="checkbox" asp-for="CreateUserViewModel.IsActivate" class="fomr-control" />
-                            <label asp-for="CreateUserViewModel.IsActivate"></label>
+                            <input type="checkbox" asp-for="UserViewModel.IsActivate" class="fomr-control" />
+                            <label asp-for="UserViewModel.IsActivate"></label>
                         </div>
                         <div class="box-footer clearfix">
                             <button type="submit" class=" btn btn-success">
@@ -70,7 +72,7 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-7 col-sm-8 col-xs-12" style="padding:8px">
-                                <img id="imgAvatar" name="AvatarName" class="img-thumbnail" style="padding-bottom:8px" src="/UserAvatar/default.jpg">
+                                <img id="imgAvatar" name="AvatarName" class="img-thumbnail" style="padding-bottom:8px" src="/UserAvatar/@Model.UserViewModel.AvatarName">
                             </div>
                             <div class="col-md-7 col-sm-8 col-xs-12">
                                 <div class="input-group">
@@ -78,7 +80,7 @@
                                         <i class="zmdi zmdi-upload"></i>
                                         <span>آپلود عکس</span>
                                     </label>
-                                    <input asp-for="CreateUserViewModel.UserAvatar" id="file-upload" type="file" style="display:none" >
+                                    <input asp-for="UserViewModel.UserAvatar" id="file-upload" type="file" style="display:none">
                                     <p>لطفا تصویری انتخاب کنید</p>
                                 </div>
                             </div>
@@ -104,7 +106,7 @@
                         @foreach (var item in Model.RolesList)
                         {
                             <label>@item.RoleTitle</label>
-                            <input name="Roles" type="checkbox" value="@item.RoleId" />
+                            <input name="Roles" type="checkbox" @(Model.UserViewModel.Roles.Any(r => r == item.RoleId) ? "checked" : "") value="@item.RoleId" />
                         }
                     </div>
                     <!-- /.box-body -->
@@ -135,3 +137,4 @@
         readURL(this);
     });
 </script>
+

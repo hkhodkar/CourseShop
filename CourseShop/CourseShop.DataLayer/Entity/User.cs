@@ -30,6 +30,9 @@ namespace CourseShop.DataLayer.Entity
 
         public string UserAvatar { get; set; }
 
+        public bool IsDeleted { get; set; }
+
+
         #region Relations
 
         public List<UserRole> UserRoles { get; set; }
