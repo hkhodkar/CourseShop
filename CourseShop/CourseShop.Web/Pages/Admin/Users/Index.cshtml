@@ -51,7 +51,7 @@
                                         <a href="/Admin/users/editUser/@item.UserId" class=" ">
                                             <i class="fa fa-edit fa-lg" style="padding:10px;color:#FF975B"></i>
                                         </a>
-                                        <a href="#" >
+                                        <a  id="delete" data-toggle="modal" data-target="#modal-default" >
                                             <i class="fa fa-trash fa-lg" style="padding:10px;color:#fe8080"></i>
                                         </a>
                                     </td>
@@ -67,6 +67,35 @@
     </div>
 </section>
 <!-- /.content -->
+
+
+
+@*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
+    مدال Default
+</button>*@
+
+<div class="modal fade in" id="modal-default" style=" padding-right: 17px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">حذف کاربر</h4>
+            </div>
+            <div class="modal-body">
+                <p>آیا از حذف کاربر انتخاب شده مطمئن هستید؟</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">خروج</button>
+                <button type="button" class="btn btn-primary">ذخیره</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 <script src="/AdminLayout/js/jquery.dataTables.js"></script>
 <script>
     $(document).ready(function () {
@@ -76,42 +105,3 @@
     })
 </script>
 
-<script type="text/javascript">
-    var persianSort = ['آ', 'ا', 'ب', 'پ', 'ت', 'ث', 'ج', 'چ', 'ح', 'خ', 'د', 'ذ', 'ر', 'ز', 'ژ', 'س', 'ش', 'ص', 'ط', 'ظ', 'ع', 'غ', 'ف', 'ق', 'ک', 'گ', 'ل', 'م', 'ن', 'و', 'ه', 'ي', 'ي'];
-    function GetUniCode(source) {
-        source = $.trim(source);
-        var result = '';
-        var i, index;
-        for (i = 0; i < source.length; i++) {
-            //Check and fix IE indexOf bug
-            if (!Array.indexOf) {
-                index = jQuery.inArray(source.charAt(i), persianSort);
-            } else {
-                index = persianSort.indexOf(source.charAt(i));
-            }
-            if (index < 0) {
-                index = source.charCodeAt(i);
-            }
-            if (index < 10) {
-                index = '0' + index;
-            }
-            result += '00' + index;
-        }
-
-        return 'a' + result;
-    }
-    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
-        "pstring-pre": function (a) {
-            return GetUniCode(a.toLowerCase());
-        },
-
-        "pstring-asc": function (a, b) {
-            return ((a < b) ? -1 : ((a > b) ? 1 : 0));
-        },
-
-        "pstring-desc": function (a, b) {
-            return ((a < b) ? 1 : ((a > b) ? -1 : 0));
-        }
-    });
-
-</script>
