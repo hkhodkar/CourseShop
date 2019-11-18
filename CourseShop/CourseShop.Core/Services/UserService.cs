@@ -270,7 +270,13 @@ namespace CourseShop.Core.Services
             #endregion
         }
 
-
+        public void DeleteUser(int id)
+        {
+            var user = GetUserById(id);
+            user.IsDeleted = true;
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
 
         #endregion
     }

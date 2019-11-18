@@ -54,6 +54,8 @@ namespace CourseShop.Core.Interfaces
 
         Task<int> EditUserAdminPanel(UserForAdminViewModel user);
 
+        void DeleteUser(int id);
+
         #endregion
 
     }

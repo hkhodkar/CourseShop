@@ -51,7 +51,7 @@
                                         <a href="/Admin/users/editUser/@item.UserId" class=" ">
                                             <i class="fa fa-edit fa-lg" style="padding:10px;color:#FF975B"></i>
                                         </a>
-                                        <a  id="delete" data-toggle="modal" data-target="#modal-default" >
+                                        <a id="delete" data-toggle="modal" onclick="test(this)" data-id="@item.UserId" data-username="@item.Username" data-target="#modal-default">
                                             <i class="fa fa-trash fa-lg" style="padding:10px;color:#fe8080"></i>
                                         </a>
                                     </td>
@@ -67,12 +67,9 @@
     </div>
 </section>
 <!-- /.content -->
-
-
-
 @*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-    مدال Default
-</button>*@
+        مدال Default
+    </button>*@
 
 <div class="modal fade in" id="modal-default" style=" padding-right: 17px;">
     <div class="modal-dialog">
@@ -83,12 +80,12 @@
                 </button>
                 <h4 class="modal-title">حذف کاربر</h4>
             </div>
-            <div class="modal-body">
-                <p>آیا از حذف کاربر انتخاب شده مطمئن هستید؟</p>
+            <div id="body" class="modal-body">
+                @*<p>آیا از حذف کاربر انتخاب شده مطمئن هستید؟</p>*@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">خروج</button>
-                <button type="button" class="btn btn-primary">ذخیره</button>
+                <button type="button" class="btn btn-primary delete">حذف</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -105,3 +102,24 @@
     })
 </script>
 
+
+
+
+<script>
+    var id;
+    var test = function (e) {
+        $("#body").html('آیا از حذف کاربر ' + e.dataset.username + ' مطمئن هستید؟');
+        id = e.dataset.id;
+    }
+    $(".delete").click(function ($this) {
+        $.ajax({
+            type: "GET",
+            url: "/Admin/users/delete?id=" + id
+        }).done(() => {
+            $(".close").trigger();
+        })
+    })
+</script>
+<script>
+
+</script>
