@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseShop.Core.Interfaces;
+using CourseShop.DataLayer.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -17,9 +18,22 @@ namespace CourseShop.Web.Pages.Admin.Users
             _userService = userService;
         }
 
-        public void OnGet(int id)
+        [BindProperty]
+        public IEnumerable<User> UsersForAdmin { get; set; }
+
+        public void OnGet()
+        {
+            UsersForAdmin = _userService.GetDeleteUsersList();
+        }
+
+        public void OnGetDelete(int id)
         {
             _userService.DeleteUser(id);
+        }
+
+        public void OnGetRestore(int id)
+        {
+            _userService.RestoreUser(id);
         }
 
 

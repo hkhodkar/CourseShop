@@ -4,19 +4,16 @@
     ViewData["Title"] = "لیست کاربران";
 }
 
-<!-- Content Header (Page header) -->
 <section class="content-header">
     <h3>
         <ul class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> پنل مدیریت </a></li>
+            <li><a href="/admin"><i class="fa fa-dashboard"></i> پنل مدیریت </a></li>
             <li class="active">لیست کاربران</li>
         </ul>
     </h3>
 </section>
 
-<!-- Main content -->
 <section class="content">
-    <!-- /.row -->
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -27,16 +24,14 @@
                         </a>
                     </div>
                 </div>
-                <!-- /.box-header -->
                 <div class="box-body table-responsive">
                     <table id="table" class="hover row-border order-column">
-
-
                         <thead>
                             <tr>
                                 <th>نام کاربری</th>
                                 <th>ایمیل</th>
                                 <th>تاریخ عضویت</th>
+                                <th>وضعیت</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -47,6 +42,16 @@
                                     <td>@item.Username</td>
                                     <td>@item.Email</td>
                                     <td>@item.RegisterDate.ToShamsi()</td>
+                                    <td>
+                                        @if (@item.IsActive)
+                                        {
+                                            <p style="color:#008D4C">فعال</p>
+                                        }
+                                        else
+                                        {
+                                            <p style="color:#fe8080">غیرفعال</p>
+                                        }
+                                    </td>
                                     <td>
                                         <a href="/Admin/users/editUser/@item.UserId" class=" ">
                                             <i class="fa fa-edit fa-lg" style="padding:10px;color:#FF975B"></i>
@@ -60,16 +65,10 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.box-body -->
             </div>
-            <!-- /.box -->
         </div>
     </div>
 </section>
-<!-- /.content -->
-@*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modal-default">
-        مدال Default
-    </button>*@
 
 <div class="modal fade in" id="modal-default" style=" padding-right: 17px;">
     <div class="modal-dialog">
@@ -81,16 +80,13 @@
                 <h4 class="modal-title">حذف کاربر</h4>
             </div>
             <div id="body" class="modal-body">
-                @*<p>آیا از حذف کاربر انتخاب شده مطمئن هستید؟</p>*@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">خروج</button>
-                <button type="button" class="btn btn-primary delete">حذف</button>
+                <button type="button" class="btn btn-danger delete">حذف</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
 
 <script src="/AdminLayout/js/jquery.dataTables.js"></script>
@@ -110,14 +106,15 @@
     var test = function (e) {
         $("#body").html('آیا از حذف کاربر ' + e.dataset.username + ' مطمئن هستید؟');
         id = e.dataset.id;
+        console.log(e);
     }
     $(".delete").click(function ($this) {
         $.ajax({
             type: "GET",
-            url: "/Admin/users/delete?id=" + id
-        }).done(() => {
-            $(".close").trigger();
+            //url: "/Admin/users/delete?id=" + id,
+            url: "/Admin/users/Delete?handler=Delete&id=" + id
         })
+        $("button.close").trigger('click')
     })
 </script>
 <script>

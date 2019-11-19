@@ -183,6 +183,7 @@ namespace CourseShop.Core.Services
                 PasswordHash = PasswordHelper.EncodePasswordMd5(user.Password),
                 RegisterDate = DateTime.Now,
                 Username = user.Username,
+                UserAvatar = "default.jpg"
             };
 
             #region Upload Image
@@ -276,6 +277,18 @@ namespace CourseShop.Core.Services
             user.IsDeleted = true;
             _context.Users.Update(user);
             _context.SaveChanges();
+        }
+
+        public IList<User> GetDeleteUsersList()
+        {
+            return _context.Users.IgnoreQueryFilters().Where(u => u.IsDeleted).ToList();
+        }
+
+        public void RestoreUser(int id)
+        {
+            var user = _context.Users.IgnoreQueryFilters().Where(u => u.UserId == id).First();
+            user.IsDeleted = false;
+            UpdateUser(user);
         }
 
         #endregion

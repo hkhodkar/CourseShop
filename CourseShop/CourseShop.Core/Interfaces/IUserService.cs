@@ -48,6 +48,8 @@ namespace CourseShop.Core.Interfaces
 
         IList<User> GetUsersList();
 
+        IList<User> GetDeleteUsersList();
+
         Task<int> AddUserInAdminPanel(UserForAdminViewModel user);
 
         Task<UserForAdminViewModel> GetUserForEditMode(int id);
@@ -55,6 +57,8 @@ namespace CourseShop.Core.Interfaces
         Task<int> EditUserAdminPanel(UserForAdminViewModel user);
 
         void DeleteUser(int id);
+
+        void RestoreUser(int id);
 
         #endregion
 

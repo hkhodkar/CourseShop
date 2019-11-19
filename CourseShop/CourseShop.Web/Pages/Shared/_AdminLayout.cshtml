@@ -21,7 +21,7 @@
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>فروشگاه دوره</b></span>
+                <span class="logo-lg"><b>پنل ادمین</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -51,7 +51,7 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-info">پروفایل</a>
+                                        <a href="/" class="btn btn-info">فروشگاه دوره</a>
                                     </div>
                                     <div class="pull-left">
                                         <a href="/logout" class="btn btn-warning">خروج</a>
@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
+                @*<form action="#" method="get" class="sidebar-form">
                     <div class="input-group">
                         <input type="text" name="q" class="form-control" placeholder="جستجو">
                         <span class="input-group-btn">
@@ -88,7 +88,7 @@
                             </button>
                         </span>
                     </div>
-                </form>
+                </form>*@
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
@@ -101,19 +101,27 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/Admin/users">کاربران</a></li>
-                            <li><a href="#">دسترسی ها</a></li>
-
+                            <li><a href="/Admin/users"> لیست کاربران سیستم</a></li>
+                            <li>
+                                <a href="/Admin/users/Delete">لیست کاربران حذف شده</a>
+                            </li>
                         </ul>
-                    </li>
-                    <li>
+                    </li>      
+                    <li class="treeview">
                         <a href="#">
-                            <i class="fa fa-th"></i>
-                            <span>
-                                کاربران حذف شده
+                            <i class="fa fa-lock"></i>
+                            <span>مدیریت دسترسی ها</span>
+                            <span class="pull-left-container">
+                                <i class="fa fa-angle-right pull-left"></i>
                             </span>
                         </a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"> لیست نقش های سیستم</a></li>
+                            <li>
+                            </li>
+                        </ul>
                     </li>
+
                 </ul>
             </section>
             <!-- /.sidebar -->
