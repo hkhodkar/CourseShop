@@ -37,4 +37,17 @@ namespace CourseShop.Core.DTOs
         [Display(Name = "فعال / غیرفعال")]
         public bool IsActivate { get; set; }
     }
+
+    public class RoleForAdminViewModel
+    {
+        public int RoleId { get; set; }
+
+
+        [Display(Name = "نام نقش")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
+        public string RoleTitle { get; set; }
+
+    }
+
 }

@@ -1,0 +1,84 @@
+﻿@page
+@model CourseShop.Web.Pages.Admin.Roles.CreateModel
+@{
+    ViewData["Title"] = "ایجاد نقش جدید";
+}
+
+<section class="content-header">
+    <h3>
+        <ul class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> پنل مدیریت </a></li>
+            <li class="active">افزودن نقش جدید</li>
+        </ul>
+    </h3>
+</section>
+
+
+<section class="content">
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="row">
+
+            <div class="col-sm-12 col-md-8">
+
+                <div class="box box-warning">
+                    <div class="box-header ui-sortable-handle" style="cursor: move;">
+                        <i class="fa fa-users"></i>
+
+                        <h3 class="box-title">ثبت نقش</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input asp-for="RoleViewModel.RoleTitle" type="text" class="form-control" placeholder="نام تقش">
+                            <span asp-validation-for="RoleViewModel.RoleTitle"></span>
+                        </div>
+
+                        <div class="box-footer clearfix">
+                            <button type="submit" class=" btn btn-success">
+                                ثبت نقش
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+
+                <div class="box box-info box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">دسترسی های نقش</h3>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </form>
+
+</section>
+
+
+<script>
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imgAvatar').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file-upload").change(function () {
+        readURL(this);
+    });
+</script>
+
+
