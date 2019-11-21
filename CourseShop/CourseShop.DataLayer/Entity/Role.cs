@@ -19,6 +19,7 @@ namespace CourseShop.DataLayer.Entity
 
         public List<UserRole> UserRoles { get; set; }
 
+        public List<RolePermission> RolePermissions { get; set; }
 
         #endregion
 

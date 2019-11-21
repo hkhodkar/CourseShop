@@ -28,9 +28,21 @@ namespace CourseShop.DataLayer.Context
 
         #endregion
 
+        #region permissions
+
+        public DbSet<Permission> Permissions { get; set; }
+
+        public DbSet<RolePermission> RolePermissions { get; set; }
+
+        #endregion
+
+        #region OnModelCreating
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsDeleted == false );
+            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsDeleted == false);
+
+            #region Seeding Database
 
             modelBuilder.Entity<WalletType>()
                 .HasData(
@@ -47,17 +59,92 @@ namespace CourseShop.DataLayer.Context
                 );
 
             modelBuilder.Entity<Role>()
+                    .HasData(
+                    new Role
+                    {
+                        RoleId = 1,
+                        RoleTitle = "مدیر سایت"
+                    },
+                     new Role
+                     {
+                         RoleId = 2,
+                         RoleTitle = "استاد"
+                     });
+
+            modelBuilder.Entity<Permission>()
                 .HasData(
-                new Role
-                {
-                    RoleId = 1,
-                    RoleTitle = "مدیر سایت"
-                },
-                 new Role
-                 {
-                     RoleId = 2,
-                     RoleTitle = "استاد"
-                 });
+
+                    new Permission()
+                    {
+                        PermissionId = 1,
+                        PermissionTitle = "پنل مدیریت",
+                        PermissionNameForAttribute = "admin panel",
+                        ParrentId = null
+                    },
+                    new Permission()
+                    {
+                        PermissionId = 2,
+                        PermissionTitle = "مدیریت کاربران",
+                        PermissionNameForAttribute = "user management",
+                        ParrentId = 1
+                    },
+                    new Permission()
+                    {
+                        PermissionId = 3,
+                        PermissionTitle = "اضافه کردن کاربر",
+                        PermissionNameForAttribute = "add user",
+                        ParrentId = 2
+                    },
+                    new Permission()
+                    {
+                        PermissionId = 4,
+                        PermissionTitle = "ویرایش  کاربر",
+                        PermissionNameForAttribute = "edit user",
+                        ParrentId = 2
+                    },
+                    new Permission()
+                    {
+                        PermissionId = 5,
+                        PermissionTitle = "حذف  کاربر",
+                        PermissionNameForAttribute = "delete user",
+                        ParrentId = 2
+                    },
+
+                    new Permission()
+                    {
+                        PermissionId = 6,
+                        PermissionTitle = "مدیریت نقش ها",
+                        PermissionNameForAttribute = "role management",
+                        ParrentId = 1
+                    },
+                    new Permission()
+                    {
+                        PermissionId = 7,
+                        PermissionTitle = "اضافه کردن نقش",
+                        PermissionNameForAttribute = "add user",
+                        ParrentId = 6
+                    },
+                    new Permission()
+                    {
+                        PermissionId = 8,
+                        PermissionTitle = "ویرایش  نقش",
+                        PermissionNameForAttribute = "edit user",
+                        ParrentId = 6
+                    },
+                    new Permission()
+                    {
+                        PermissionId = 9,
+                        PermissionTitle = "حذف  نقش",
+                        PermissionNameForAttribute = "delete user",
+                        ParrentId = 6
+                    }
+
+                );
         }
+
+        #endregion
+
     }
+    #endregion
+
 }

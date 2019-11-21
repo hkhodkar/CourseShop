@@ -1,11 +1,8 @@
 ﻿using CourseShop.Core.Interfaces;
 using CourseShop.DataLayer.Context;
 using CourseShop.DataLayer.Entity;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CourseShop.Core.Services
 {
@@ -23,27 +20,27 @@ namespace CourseShop.Core.Services
             return _context.Roles.ToList();
         }
 
-        public async void AddUserRole(int userId , int roleId)
+        public async void AddUserRole(int userId, int roleId)
         {
             UserRole userRole = new UserRole
             {
                 RoleId = roleId,
                 UserId = userId
             };
-           await _context.UserRoles.AddAsync(userRole);
+            await _context.UserRoles.AddAsync(userRole);
             _context.SaveChanges();
         }
 
         public async void UpdateUserRoles(int userId, List<int> roles)
         {
-            var OldRoles =  _context.UserRoles.Where(r => r.UserId == userId).ToList();
-            foreach(var role in OldRoles)
+            var OldRoles = _context.UserRoles.Where(r => r.UserId == userId).ToList();
+            foreach (var role in OldRoles)
             {
                 _context.UserRoles.Remove(role);
                 _context.SaveChanges();
             }
 
-            foreach(var item in roles)
+            foreach (var item in roles)
             {
                 UserRole userRole = new UserRole
                 {
@@ -56,7 +53,17 @@ namespace CourseShop.Core.Services
 
         }
 
+        public int AddRole(Role role)
+        {
+            _context.Roles.Add(role);
+            _context.SaveChanges();
 
+            return role.RoleId;
+        }
 
+        public Role GetRoleById(int id)
+        {
+            return _context.Roles.Where(r => r.RoleId == id).FirstOrDefault();
+        }
     }
 }

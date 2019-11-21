@@ -2,11 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace CourseShop.Core.DTOs
 {
-   public class UserForAdminViewModel
+    public class UserForAdminViewModel
     {
         public int Id { get; set; }
 
@@ -20,7 +19,7 @@ namespace CourseShop.Core.DTOs
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
         public string Email { get; set; }
 
-    
+
         public string Password { get; set; }
 
         public string Repassword { get; set; }
@@ -37,17 +36,4 @@ namespace CourseShop.Core.DTOs
         [Display(Name = "فعال / غیرفعال")]
         public bool IsActivate { get; set; }
     }
-
-    public class RoleForAdminViewModel
-    {
-        public int RoleId { get; set; }
-
-
-        [Display(Name = "نام نقش")]
-        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string RoleTitle { get; set; }
-
-    }
-
 }

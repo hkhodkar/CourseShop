@@ -4,14 +4,16 @@ using CourseShop.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseShop.DataLayer.Migrations
 {
     [DbContext(typeof(CourseShopContext))]
-    partial class CourseShopContextModelSnapshot : ModelSnapshot
+    [Migration("20191121044624_changePermissionTable")]
+    partial class changePermissionTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,70 +42,6 @@ namespace CourseShop.DataLayer.Migrations
                     b.HasIndex("ParrentId");
 
                     b.ToTable("Permissions");
-
-                    b.HasData(
-                        new
-                        {
-                            PermissionId = 1,
-                            PermissionNameForAttribute = "admin panel",
-                            PermissionTitle = "پنل مدیریت"
-                        },
-                        new
-                        {
-                            PermissionId = 2,
-                            ParrentId = 1,
-                            PermissionNameForAttribute = "user management",
-                            PermissionTitle = "مدیریت کاربران"
-                        },
-                        new
-                        {
-                            PermissionId = 3,
-                            ParrentId = 2,
-                            PermissionNameForAttribute = "add user",
-                            PermissionTitle = "اضافه کردن کاربر"
-                        },
-                        new
-                        {
-                            PermissionId = 4,
-                            ParrentId = 2,
-                            PermissionNameForAttribute = "edit user",
-                            PermissionTitle = "ویرایش  کاربر"
-                        },
-                        new
-                        {
-                            PermissionId = 5,
-                            ParrentId = 2,
-                            PermissionNameForAttribute = "delete user",
-                            PermissionTitle = "حذف  کاربر"
-                        },
-                        new
-                        {
-                            PermissionId = 6,
-                            ParrentId = 1,
-                            PermissionNameForAttribute = "role management",
-                            PermissionTitle = "مدیریت نقش ها"
-                        },
-                        new
-                        {
-                            PermissionId = 7,
-                            ParrentId = 6,
-                            PermissionNameForAttribute = "add user",
-                            PermissionTitle = "اضافه کردن نقش"
-                        },
-                        new
-                        {
-                            PermissionId = 8,
-                            ParrentId = 6,
-                            PermissionNameForAttribute = "edit user",
-                            PermissionTitle = "ویرایش  نقش"
-                        },
-                        new
-                        {
-                            PermissionId = 9,
-                            ParrentId = 6,
-                            PermissionNameForAttribute = "delete user",
-                            PermissionTitle = "حذف  نقش"
-                        });
                 });
 
             modelBuilder.Entity("CourseShop.DataLayer.Entity.Role", b =>

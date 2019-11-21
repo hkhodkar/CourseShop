@@ -5893,3 +5893,11 @@ table.text-center th {
             white-space: normal !important;
         }
 }
+
+
+/*mystyle*/
+
+.box-body ul {
+    list-style:none;
+}
+
