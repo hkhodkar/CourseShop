@@ -21,20 +21,31 @@ namespace CourseShop.Core.Services
 
         }
 
-        public void AddRolePermission(int roleId, int permissionId)
+        public void AddRolePermission(int roleId, List<int> permissionIdList)
         {
-            var rolePermission = new RolePermission
+            foreach (var permissionId in permissionIdList)
             {
-                PermissionId = permissionId,
-                RoleId = roleId
-            };
-            _context.RolePermissions.Add(rolePermission);
-            _context.SaveChanges();
+
+                var rolePermission = new RolePermission
+                {
+                    PermissionId = permissionId,
+                    RoleId = roleId
+                };
+                _context.RolePermissions.Add(rolePermission);
+                _context.SaveChanges();
+            }
         }
 
         public List<int> GetRolesPermission(int roleId)
         {
             return _context.RolePermissions.Where(r => r.RoleId == roleId).Select(r => r.PermissionId).ToList();
+        }
+
+        public void EditRolePermission(int roleId, List<int> permissionIdList)
+        {
+            _context.RolePermissions.Where(r => r.RoleId == roleId).ToList().ForEach(p => _context.RolePermissions.Remove(p));
+            AddRolePermission(roleId, permissionIdList);
+            _context.SaveChanges();
         }
     }
 }

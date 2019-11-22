@@ -41,5 +41,12 @@ namespace CourseShop.Web.Pages.Admin.Roles
 
             return Page();
         }
+
+        public IActionResult OnPost(List<int> permissionIdList)
+        {
+            _permissionService.EditRolePermission(Role.RoleId, permissionIdList);
+
+            return RedirectToPage("index");
+        }
     }
 }

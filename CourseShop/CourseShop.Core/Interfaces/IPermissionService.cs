@@ -8,8 +8,10 @@ namespace CourseShop.Core.Interfaces
     {
         List<Permission> PermissionList();
 
-        void AddRolePermission(int roleId, int permissionId);
+        void AddRolePermission(int roleId, List<int> permissionId);
 
         List<int> GetRolesPermission(int roleId);
+
+        void EditRolePermission(int roleId, List<int> permissionIdList);
     }
 }

@@ -274,9 +274,12 @@ namespace CourseShop.Core.Services
         public void DeleteUser(int id)
         {
             var user = GetUserById(id);
-            user.IsDeleted = true;
-            _context.Users.Update(user);
-            _context.SaveChanges();
+            if(user !=null)
+            {
+                user.IsDeleted = true;
+                _context.Users.Update(user);
+                _context.SaveChanges();
+            }
         }
 
         public IList<User> GetDeleteUsersList()

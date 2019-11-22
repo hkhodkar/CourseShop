@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CourseShop.Core.DTOs;
-using CourseShop.Core.Interfaces;
+﻿using CourseShop.Core.Interfaces;
 using CourseShop.DataLayer.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 
 namespace CourseShop.Web.Pages.Admin.Roles
 {
@@ -32,21 +28,20 @@ namespace CourseShop.Web.Pages.Admin.Roles
 
 
 
-        public  void OnGet()
+        public void OnGet()
         {
-            PermissionsList =  _permissionService.PermissionList();
+            PermissionsList = _permissionService.PermissionList();
         }
 
         public IActionResult OnPost(List<int> permissionIdList)
         {
-            var roleId =_roleService.AddRole(Role);
+            var roleId = _roleService.AddRole(Role);
 
-            foreach(var permissionId in permissionIdList)
             {
-                _permissionService.AddRolePermission(roleId, permissionId);
-            }
+                _permissionService.AddRolePermission(roleId, permissionIdList);
 
-            return RedirectToPage("index");
+                return RedirectToPage("index");
+            }
         }
     }
 }

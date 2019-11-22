@@ -102,19 +102,21 @@
 
 
 <script>
-    var id;
+    var id, btnRefrence;
+
     var test = function (e) {
+        btnRefrence = e;
         $("#body").html('آیا از حذف کاربر ' + e.dataset.username + ' مطمئن هستید؟');
         id = e.dataset.id;
-        console.log(e);
     }
     $(".delete").click(function ($this) {
         $.ajax({
             type: "GET",
             //url: "/Admin/users/delete?id=" + id,
-            url: "/Admin/users/Delete?handler=Delete&id=" + id
+            url: "/Admin/users/Delete?handler=Delete&id=" + id,
+        }).done(() => {
+            console.log("hi");
         })
-        $("button.close").trigger('click')
-    })
+    });
 </script>
 
