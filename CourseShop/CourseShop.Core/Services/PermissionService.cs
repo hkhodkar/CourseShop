@@ -47,5 +47,17 @@ namespace CourseShop.Core.Services
             AddRolePermission(roleId, permissionIdList);
             _context.SaveChanges();
         }
+
+        public bool CheckPermission(int permissionId, string username)
+        {
+            int userid = _context.Users.Single(u => u.Username == username).UserId;
+
+            List<int> userRoles = _context.UserRoles.Where(u => u.UserId == userid).Select(r => r.RoleId).ToList();
+            if (!userRoles.Any()) return false;
+
+            List<int> RolePermission = _context.RolePermissions.Where(p => p.PermissionId == permissionId).Select(p => p.RoleId).ToList();
+
+            return RolePermission.Any(p => userRoles.Contains(p));
+        }
     }
 }

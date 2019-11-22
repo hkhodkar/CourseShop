@@ -13,5 +13,8 @@ namespace CourseShop.Core.Interfaces
         List<int> GetRolesPermission(int roleId);
 
         void EditRolePermission(int roleId, List<int> permissionIdList);
+
+        bool CheckPermission(int permissionId , string username);
+
     }
 }
