@@ -1,5 +1,4 @@
-﻿using CourseShop.Core.DTOs;
-using CourseShop.DataLayer.Entity;
+﻿using CourseShop.DataLayer.Entity;
 using System.Collections.Generic;
 
 namespace CourseShop.Core.Interfaces
@@ -15,6 +14,13 @@ namespace CourseShop.Core.Interfaces
         int AddRole(Role role);
 
         Role GetRoleById(int id);
+
+        IList<Role> GetDeleteRoleList();
+
+        void RestoreRole(int id);
+
+        void DeleteRole(int id);
+
 
     }
 }

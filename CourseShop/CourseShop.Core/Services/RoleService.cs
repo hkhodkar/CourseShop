@@ -1,6 +1,7 @@
 ﻿using CourseShop.Core.Interfaces;
 using CourseShop.DataLayer.Context;
 using CourseShop.DataLayer.Entity;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -64,6 +65,31 @@ namespace CourseShop.Core.Services
         public Role GetRoleById(int id)
         {
             return _context.Roles.Where(r => r.RoleId == id).FirstOrDefault();
+        }
+
+
+        public IList<Role> GetDeleteRoleList()
+        {
+            return _context.Roles.IgnoreQueryFilters().Where(r => r.IsDeleted).ToList();
+        }
+
+        public void RestoreRole(int id)
+        {
+            var role = _context.Roles.IgnoreQueryFilters().Where(r => r.RoleId == id).FirstOrDefault();
+            if (role != null)
+            {
+                role.IsDeleted = false;
+                _context.Roles.Update(role);
+                _context.SaveChanges();
+            }
+        }
+
+        public void DeleteRole(int id)
+        {
+            var role = _context.Roles.FirstOrDefault(r => r.RoleId == id);
+            role.IsDeleted = true;
+            _context.Roles.Update(role);
+            _context.SaveChanges();
         }
     }
 }
