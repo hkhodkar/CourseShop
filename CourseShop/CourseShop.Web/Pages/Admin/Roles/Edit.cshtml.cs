@@ -1,4 +1,5 @@
 ﻿using CourseShop.Core.Interfaces;
+using CourseShop.Core.Security;
 using CourseShop.DataLayer.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 
 namespace CourseShop.Web.Pages.Admin.Roles
 {
+    [PermissionChecker(8)]
     public class EditModel : PageModel
     {
         private readonly IPermissionService _permissionService;

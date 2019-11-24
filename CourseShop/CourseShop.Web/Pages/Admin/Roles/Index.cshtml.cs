@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace CourseShop.Web.Pages.Admin.Roles
 {
-    [PermissionChecker("role management")]
+    [PermissionChecker(6)]
     public class IndexModel : PageModel
     {
         private readonly IRoleService _roleService;
