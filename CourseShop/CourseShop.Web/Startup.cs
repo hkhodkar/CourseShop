@@ -1,5 +1,6 @@
 ﻿using CourseShop.Core.Convertors;
 using CourseShop.Core.Interfaces;
+using CourseShop.Core.Security;
 using CourseShop.Core.Services;
 using CourseShop.DataLayer.Context;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -91,6 +92,8 @@ namespace CourseShop.Web
                 routes.MapRoute("Default", "{controller=Home}/{action=Index}/{id?}");
             });
             app.UseMvcWithDefaultRoute();
+
+            SeedUserAndRole.Initialize(app.ApplicationServices, app);
 
             app.Run(async (context) =>
             {

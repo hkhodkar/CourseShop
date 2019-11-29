@@ -21,6 +21,10 @@ namespace CourseShop.Core.Interfaces
 
         void DeleteRole(int id);
 
+        Role GetRoleByName(string roleTitle);
+
+        int GetRoleIdByRoleTitle(string roleTitle);
+
 
     }
 }

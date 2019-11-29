@@ -1,6 +1,5 @@
 ﻿using CourseShop.DataLayer.Entity;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace CourseShop.DataLayer.Context
 {
@@ -61,18 +60,6 @@ namespace CourseShop.DataLayer.Context
                     }
                 );
 
-            modelBuilder.Entity<Role>()
-                    .HasData(
-                    new Role
-                    {
-                        RoleId = 1,
-                        RoleTitle = "مدیر سایت"
-                    },
-                     new Role
-                     {
-                         RoleId = 2,
-                         RoleTitle = "استاد"
-                     });
 
             modelBuilder.Entity<Permission>()
                 .HasData(
@@ -142,89 +129,6 @@ namespace CourseShop.DataLayer.Context
                         ParrentId = 6
                     }
 
-                );
-
-            modelBuilder.Entity<User>()
-                .HasData(
-                    new User
-                    {
-                        UserId = 1,
-                        ActivateCode = "f53c00d5676e451ea31e52f4410d23c3",
-                        Email = "hatef.khodkar@hotmail.com",
-                        IsActive = true,
-                        IsDeleted = false,
-                        UserAvatar = "default.jpg",
-                        PasswordHash = "20-2C-B9-62-AC-59-07-5B-96-4B-07-15-2D-23-4B-70",
-                        RegisterDate = DateTime.Now,
-                        Username = "هاتف خودکار",
-                    }
-                );
-
-            modelBuilder.Entity<UserRole>()
-                .HasData(
-                new UserRole
-                {
-                    USR_RoleId = 1,
-                    UserId = 1,
-                    RoleId = 1
-                });
-
-            modelBuilder.Entity<RolePermission>()
-                .HasData(
-                new RolePermission
-                {
-                    RP_Id = 1,
-                    RoleId = 1,
-                    PermissionId = 1
-                },
-                new RolePermission
-                {
-                    RP_Id = 2,
-                    RoleId = 1,
-                    PermissionId = 2
-                },
-                new RolePermission
-                {
-                    RP_Id = 3,
-                    RoleId = 1,
-                    PermissionId = 3
-                },
-                new RolePermission
-                {
-                    RP_Id = 4,
-                    RoleId = 1,
-                    PermissionId = 4
-                },
-                new RolePermission
-                {
-                    RP_Id = 5,
-                    RoleId = 1,
-                    PermissionId = 5
-                },
-                new RolePermission
-                {
-                    RP_Id = 6,
-                    RoleId = 1,
-                    PermissionId = 6
-                },
-                new RolePermission
-                {
-                    RP_Id = 7,
-                    RoleId = 1,
-                    PermissionId = 7
-                },
-                new RolePermission
-                {
-                    RP_Id = 8,
-                    RoleId = 1,
-                    PermissionId = 8
-                },
-                new RolePermission
-                {
-                    RP_Id = 9,
-                    RoleId = 1,
-                    PermissionId = 9
-                }
                 );
         }
 

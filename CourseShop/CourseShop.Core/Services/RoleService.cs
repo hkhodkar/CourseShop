@@ -29,7 +29,6 @@ namespace CourseShop.Core.Services
                 UserId = userId
             };
             await _context.UserRoles.AddAsync(userRole);
-            _context.SaveChanges();
         }
 
         public async void UpdateUserRoles(int userId, List<int> roles)
@@ -38,7 +37,7 @@ namespace CourseShop.Core.Services
             foreach (var role in OldRoles)
             {
                 _context.UserRoles.Remove(role);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
             foreach (var item in roles)
@@ -49,7 +48,6 @@ namespace CourseShop.Core.Services
                     UserId = userId
                 };
                 await _context.UserRoles.AddAsync(userRole);
-                _context.SaveChanges();
             }
 
         }
@@ -90,6 +88,16 @@ namespace CourseShop.Core.Services
             role.IsDeleted = true;
             _context.Roles.Update(role);
             _context.SaveChanges();
+        }
+
+        public Role GetRoleByName(string roleName)
+        {
+            return _context.Roles.First(r => r.RoleTitle == roleName);
+        }
+
+        public int GetRoleIdByRoleTitle(string roleTitle)
+        {
+            return _context.Roles.Where(r => r.RoleTitle == roleTitle).Select(r => r.RoleId).Single();
         }
     }
 }

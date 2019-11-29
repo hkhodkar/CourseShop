@@ -36,32 +36,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.UsersForAdmin)
+                            @if (Model.UsersForAdmin != null)
                             {
-                                <tr>
-                                    <td>@item.Username</td>
-                                    <td>@item.Email</td>
-                                    <td>@item.RegisterDate.ToShamsi()</td>
-                                    <td>
-                                        @if (@item.IsActive)
-                                        {
-                                            <p style="color:#008D4C">فعال</p>
-                                        }
-                                        else
-                                        {
-                                            <p style="color:#fe8080">غیرفعال</p>
-                                        }
-                                    </td>
-                                    <td>
-                                        <a href="/Admin/users/editUser/@item.UserId" class=" ">
-                                            <i class="fa fa-edit fa-lg" style="padding:10px;color:#FF975B"></i>
-                                        </a>
-                                        <a id="delete" style="cursor:pointer" data-toggle="modal" onclick="test(this)" data-id="@item.UserId" data-username="@item.Username" data-target="#modal-default">
-                                            <i class="fa fa-trash fa-lg" style="padding:10px;color:#fe8080"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                @foreach (var item in Model.UsersForAdmin)
+                                {
+                                    <tr class="js-btnDelete" data-id="@item.UserId">
+                                        <td>@item.Username</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.RegisterDate.ToShamsi()</td>
+                                        <td>
+                                            @if (@item.IsActive)
+                                            {
+                                                <p style="color:#008D4C">فعال</p>
+                                            }
+                                            else
+                                            {
+                                                <p style="color:#fe8080">غیرفعال</p>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="/Admin/users/editUser/@item.UserId" class=" ">
+                                                <i class="fa fa-edit fa-lg" style="padding:10px;color:#FF975B"></i>
+                                            </a>
+                                            <a style="cursor:pointer" data-toggle="modal" data-id="@item.UserId" class="js-btnDelete" data-target="#modal-default">
+                                                <i class="fa fa-trash fa-lg" style="padding:10px;color:#fe8080"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
                             }
+
                         </tbody>
                     </table>
                 </div>
@@ -70,7 +74,7 @@
     </div>
 </section>
 
-<div class="modal fade in" id="modal-default" style=" padding-right: 17px;">
+<div class="modal fade in" id="myModal" style=" padding-right: 17px;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -83,7 +87,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">خروج</button>
-                <button type="button" class="btn btn-danger delete">حذف</button>
+                <button type="button" class="btn btn-danger" id="btnDelteYes">حذف</button>
             </div>
         </div>
     </div>
@@ -101,22 +105,45 @@
 
 
 
-<script>
-    var id, btnRefrence;
+@*<script>
+        var id, btnRefrence;
 
-    var test = function (e) {
-        btnRefrence = e;
-        $("#body").html('آیا از حذف کاربر ' + e.dataset.username + ' مطمئن هستید؟');
-        id = e.dataset.id;
-    }
-    $(".delete").click(function ($this) {
+        var test = function (e) {
+            btnRefrence = e;
+            $("#body").html('آیا از حذف کاربر ' + e.dataset.username + ' مطمئن هستید؟');
+            id = e.dataset.id;
+        }
+        $(".delete").click(function ($this) {
+            $.ajax({
+                type: "GET",
+                //url: "/Admin/users/delete?id=" + id,
+                url: "/Admin/users/Delete?handler=Delete&id=" + id,
+            }).done(() => {
+                console.log("hi");
+            })
+        });
+    </script>*@
+
+<script>
+    $('a.js-btnDelete').on('click', function (e) {
+        debugger;
+        e.preventDefault();
+        $("#body").html('آیا از حذف کاربر  مطمئن هستید؟');
+        var id = $(this).closest('tr').data('id');
+        $('#myModal').data('id', id).modal('show');
+
+    });
+
+    $('#btnDelteYes').click(function () {
+        var id = $('#myModal').data('id');
         $.ajax({
-            type: "GET",
+            type: "DELETE",
             //url: "/Admin/users/delete?id=" + id,
-            url: "/Admin/users/Delete?handler=Delete&id=" + id,
+            url: "/Admin/users/Delete/" + id,
         }).done(() => {
-            console.log("hi");
+            $('[data-id=' + id + ']').remove();
+            $('#myModal').modal('hide');
         })
+
     });
 </script>
-

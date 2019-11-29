@@ -38,6 +38,11 @@ namespace CourseShop.Web.Pages.Admin.Users
             _userService.RestoreUser(id);
         }
 
+        public void OnDelete(int id)
+        {
+            _userService.DeleteUser(id);
+        }
+
 
     }
 }
