@@ -99,51 +99,28 @@
         $("#table").DataTable({
             "dom": '<"top"f>rt<"bottom"lp><"clear">'
         });
+
+        $('a.js-btnDelete').on('click', function (e) {
+            debugger;
+            e.preventDefault();
+            $("#body").html('آیا از حذف کاربر  مطمئن هستید؟');
+            var id = $(this).closest('tr').data('id');
+            $('#myModal').data('id', id).modal('show');
+
+        });
+
+        $('#btnDelteYes').click(function () {
+            var id = $('#myModal').data('id');
+            $.ajax({
+                type: "GET",
+                url: "/Admin/users/delete?id=" + id,
+                success: () => {
+                    $('[data-id=' + id + ']').remove();
+                    $('#myModal').modal('hide');
+                }
+            })
+        });
     })
 </script>
 
-
-
-
-@*<script>
-        var id, btnRefrence;
-
-        var test = function (e) {
-            btnRefrence = e;
-            $("#body").html('آیا از حذف کاربر ' + e.dataset.username + ' مطمئن هستید؟');
-            id = e.dataset.id;
-        }
-        $(".delete").click(function ($this) {
-            $.ajax({
-                type: "GET",
-                //url: "/Admin/users/delete?id=" + id,
-                url: "/Admin/users/Delete?handler=Delete&id=" + id,
-            }).done(() => {
-                console.log("hi");
-            })
-        });
-    </script>*@
-
-<script>
-    $('a.js-btnDelete').on('click', function (e) {
-        debugger;
-        e.preventDefault();
-        $("#body").html('آیا از حذف کاربر  مطمئن هستید؟');
-        var id = $(this).closest('tr').data('id');
-        $('#myModal').data('id', id).modal('show');
-
-    });
-
-    $('#btnDelteYes').click(function () {
-        var id = $('#myModal').data('id');
-        $.ajax({
-            type: "DELETE",
-            //url: "/Admin/users/delete?id=" + id,
-            url: "/Admin/users/Delete/" + id,
-        }).done(() => {
-            $('[data-id=' + id + ']').remove();
-            $('#myModal').modal('hide');
-        })
-
-    });
-</script>
+t>

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 
 namespace CourseShop.Web.Pages.Admin.Roles
 {
-    [PermissionChecker(9)]
     public class DeleteModel : PageModel
     {
         private readonly IRoleService _roleService;
@@ -19,18 +18,13 @@ namespace CourseShop.Web.Pages.Admin.Roles
             _roleService = roleService;
         }
 
-        [BindProperty]
-        public IList<Role> RolesList { get; set; }
 
-        public void OnGet()
-        {
-            RolesList = _roleService.GetDeleteRoleList();
-        }
-
-        public void OnGetDelete(int id)
+        public void OnGet(int id)
         {
             _roleService.DeleteRole(id);
+
         }
+
 
         public void OnGetRestore(int id)
         {
