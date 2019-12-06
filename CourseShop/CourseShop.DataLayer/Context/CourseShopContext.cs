@@ -38,9 +38,13 @@ namespace CourseShop.DataLayer.Context
         #endregion
 
 
-        #region CourseGroup
+        #region Course
 
         public DbSet<CourseGroup> CourseGroup { get; set; }
+
+        public DbSet<CourseLevel> CourseLevel { get; set; }
+
+
 
         #endregion
 
@@ -56,6 +60,7 @@ namespace CourseShop.DataLayer.Context
 
             #region Seeding Database
 
+            #region SeedWalletType
             modelBuilder.Entity<WalletType>()
                 .HasData(
                     new WalletType
@@ -69,8 +74,9 @@ namespace CourseShop.DataLayer.Context
                         TypeTitle = "برداشت"
                     }
                 );
+            #endregion
 
-
+            #region seedPermission
             modelBuilder.Entity<Permission>()
                 .HasData(
 
@@ -141,175 +147,202 @@ namespace CourseShop.DataLayer.Context
 
                 );
 
+            #endregion
 
+            #region SeedCourseGroup
             modelBuilder.Entity<CourseGroup>().HasData(
 
-                new CourseGroup
+             new CourseGroup
+             {
+                 CourseGroupId = 1,
+                 CourseGroupTitle = "برنامه نویسی موبایل",
+                 IsDeleted = false,
+                 ParentId = null
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 2,
+                 CourseGroupTitle = "زامارین Xamarin",
+                 IsDeleted = false,
+                 ParentId = 1
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 3,
+                 CourseGroupTitle = "React Native",
+                 IsDeleted = false,
+                 ParentId = 1
+             },
+
+
+             new CourseGroup
+             {
+                 CourseGroupId = 5,
+                 CourseGroupTitle = "برنامه نویسی وب",
+                 IsDeleted = false,
+                 ParentId = null
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 6,
+                 CourseGroupTitle = "ASP.net WebForms",
+                 IsDeleted = false,
+                 ParentId = 5
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 7,
+                 CourseGroupTitle = "ASP.net MVC",
+                 IsDeleted = false,
+                 ParentId = 5
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 8,
+                 CourseGroupTitle = "PHP MVC",
+                 IsDeleted = false,
+                 ParentId = 5
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 9,
+                 CourseGroupTitle = "ASP.net Core",
+                 IsDeleted = false,
+                 ParentId = 5
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 10,
+                 CourseGroupTitle = "برنامه نویسی تحت ویندوز",
+                 IsDeleted = false,
+                 ParentId = null
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 11,
+                 CourseGroupTitle = "سی شارپ C#",
+                 IsDeleted = false,
+                 ParentId = 10
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 12,
+                 CourseGroupTitle = "جاوا Java",
+                 IsDeleted = false,
+                 ParentId = 10
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 13,
+                 CourseGroupTitle = "Node JS",
+                 IsDeleted = false,
+                 ParentId = 10
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 14,
+                 CourseGroupTitle = "بانک های اطلاعاتی",
+                 IsDeleted = false,
+                 ParentId = null
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 15,
+                 CourseGroupTitle = "SQL Server",
+                 IsDeleted = false,
+                 ParentId = 14
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 16,
+                 CourseGroupTitle = "No SQL",
+                 IsDeleted = false,
+                 ParentId = 14
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 17,
+                 CourseGroupTitle = "My SQL",
+                 IsDeleted = false,
+                 ParentId = 14
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 18,
+                 CourseGroupTitle = "طراحی سایت",
+                 IsDeleted = false,
+                 ParentId = null
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 19,
+                 CourseGroupTitle = "Bootstrap",
+                 IsDeleted = false,
+                 ParentId = 18
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 20,
+                 CourseGroupTitle = "JQuery",
+                 IsDeleted = false,
+                 ParentId = 18
+             },
+
+             new CourseGroup
+             {
+                 CourseGroupId = 21,
+                 CourseGroupTitle = "Java Script",
+                 IsDeleted = false,
+                 ParentId = 18
+             }
+
+             );
+
+            #endregion
+
+            #region SeedCourseLevel
+
+            modelBuilder.Entity<CourseLevel>().HasData(
+                new CourseLevel()
                 {
-                    CourseGroupId = 1,
-                    CourseGroupTitle = "برنامه نویسی موبایل",
-                    IsDeleted = false,
-                    ParentId = null
+                    CourseLevelId = 1,
+                    CourseLevelTitle = "مبتدی"
                 },
-
-                new CourseGroup
+                new CourseLevel()
                 {
-                    CourseGroupId = 2,
-                    CourseGroupTitle = "زامارین Xamarin",
-                    IsDeleted = false,
-                    ParentId = 1
+                    CourseLevelId = 2,
+                    CourseLevelTitle = "متوسط"
                 },
-
-                new CourseGroup
+                new CourseLevel()
                 {
-                    CourseGroupId = 3,
-                    CourseGroupTitle = "React Native",
-                    IsDeleted = false,
-                    ParentId = 1
-                },
-
-
-                new CourseGroup
-                {
-                    CourseGroupId = 5,
-                    CourseGroupTitle = "برنامه نویسی وب",
-                    IsDeleted = false,
-                    ParentId = null
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 6,
-                    CourseGroupTitle = "ASP.net WebForms",
-                    IsDeleted = false,
-                    ParentId = 5
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 7,
-                    CourseGroupTitle = "ASP.net MVC",
-                    IsDeleted = false,
-                    ParentId = 5
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 8,
-                    CourseGroupTitle = "PHP MVC",
-                    IsDeleted = false,
-                    ParentId = 5
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 9,
-                    CourseGroupTitle = "ASP.net Core",
-                    IsDeleted = false,
-                    ParentId = 5
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 10,
-                    CourseGroupTitle = "برنامه نویسی تحت ویندوز",
-                    IsDeleted = false,
-                    ParentId = null
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 11,
-                    CourseGroupTitle = "سی شارپ C#",
-                    IsDeleted = false,
-                    ParentId = 10
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 12,
-                    CourseGroupTitle = "جاوا Java",
-                    IsDeleted = false,
-                    ParentId = 10
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 13,
-                    CourseGroupTitle = "Node JS",
-                    IsDeleted = false,
-                    ParentId = 10
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 14,
-                    CourseGroupTitle = "بانک های اطلاعاتی",
-                    IsDeleted = false,
-                    ParentId = null
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 15,
-                    CourseGroupTitle = "SQL Server",
-                    IsDeleted = false,
-                    ParentId = 14
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 16,
-                    CourseGroupTitle = "No SQL",
-                    IsDeleted = false,
-                    ParentId = 14
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 17,
-                    CourseGroupTitle = "My SQL",
-                    IsDeleted = false,
-                    ParentId = 14
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 18,
-                    CourseGroupTitle = "طراحی سایت",
-                    IsDeleted = false,
-                    ParentId = null
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 19,
-                    CourseGroupTitle = "Bootstrap",
-                    IsDeleted = false,
-                    ParentId = 18
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 20,
-                    CourseGroupTitle = "JQuery",
-                    IsDeleted = false,
-                    ParentId = 18
-                },
-
-                new CourseGroup
-                {
-                    CourseGroupId = 21,
-                    CourseGroupTitle = "Java Script",
-                    IsDeleted = false,
-                    ParentId = 18
+                    CourseLevelId = 3,
+                    CourseLevelTitle = "پیشرفته"
                 }
-
                 );
+
+            #endregion
+
+
+            #endregion
+
         }
-
-        #endregion
-
     }
     #endregion
 
