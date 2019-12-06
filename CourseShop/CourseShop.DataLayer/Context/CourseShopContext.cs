@@ -37,13 +37,17 @@ namespace CourseShop.DataLayer.Context
 
         #endregion
 
-
         #region Course
 
         public DbSet<CourseGroup> CourseGroup { get; set; }
 
         public DbSet<CourseLevel> CourseLevel { get; set; }
 
+        public DbSet<CourseStatus> CourseStatus { get; set; }
+
+        public DbSet<Course> Course { get; set; }
+
+        public DbSet<CourseEpisode> CourseEpisode { get; set; }
 
 
         #endregion
@@ -334,6 +338,28 @@ namespace CourseShop.DataLayer.Context
                 {
                     CourseLevelId = 3,
                     CourseLevelTitle = "پیشرفته"
+                }
+                );
+
+            #endregion
+
+            #region seedCourseStatus
+
+            modelBuilder.Entity<CourseStatus>().HasData(
+                new CourseStatus()
+                {
+                    CourseStatusId = 1,
+                    CourseStatusTitle = "درحال ثبت نام"
+                },
+                new CourseStatus
+                {
+                    CourseStatusId = 2,
+                    CourseStatusTitle = "در حال برگزاری"
+                },
+                new CourseStatus
+                {
+                    CourseStatusId = 3,
+                    CourseStatusTitle = "اتمام دوره"
                 }
                 );
 

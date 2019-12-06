@@ -4,101 +4,22 @@ using CourseShop.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseShop.DataLayer.Migrations
 {
     [DbContext(typeof(CourseShopContext))]
-    partial class CourseShopContextModelSnapshot : ModelSnapshot
+    [Migration("20191206133920_addCourseStatus")]
+    partial class addCourseStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CourseShop.DataLayer.Entity.Courses.Course", b =>
-                {
-                    b.Property<int>("CourseId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CourseDescription")
-                        .IsRequired();
-
-                    b.Property<int>("CourseLevelId");
-
-                    b.Property<int>("CoursePrice")
-                        .HasMaxLength(50);
-
-                    b.Property<int>("CourseStatusId");
-
-                    b.Property<string>("CourseTitle")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<string>("DemoFileName")
-                        .HasMaxLength(50);
-
-                    b.Property<int>("GroupId")
-                        .HasMaxLength(200);
-
-                    b.Property<string>("ImageName")
-                        .HasMaxLength(50);
-
-                    b.Property<int?>("SubGroupId");
-
-                    b.Property<string>("Tags")
-                        .HasMaxLength(600);
-
-                    b.Property<int>("TeacherId");
-
-                    b.Property<DateTime?>("UpdateDate");
-
-                    b.HasKey("CourseId");
-
-                    b.HasIndex("CourseLevelId");
-
-                    b.HasIndex("CourseStatusId");
-
-                    b.HasIndex("GroupId");
-
-                    b.HasIndex("SubGroupId");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("Course");
-                });
-
-            modelBuilder.Entity("CourseShop.DataLayer.Entity.Courses.CourseEpisode", b =>
-                {
-                    b.Property<int>("EpisodeId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CourseId");
-
-                    b.Property<string>("EpisodeFileName")
-                        .IsRequired();
-
-                    b.Property<TimeSpan>("EpisodeTiem");
-
-                    b.Property<string>("EpisodeTitle")
-                        .IsRequired()
-                        .HasMaxLength(200);
-
-                    b.Property<bool>("IsFree");
-
-                    b.HasKey("EpisodeId");
-
-                    b.HasIndex("CourseId");
-
-                    b.ToTable("CourseEpisode");
-                });
 
             modelBuilder.Entity("CourseShop.DataLayer.Entity.Courses.CourseGroup", b =>
                 {
@@ -548,45 +469,10 @@ namespace CourseShop.DataLayer.Migrations
                         });
                 });
 
-            modelBuilder.Entity("CourseShop.DataLayer.Entity.Courses.Course", b =>
-                {
-                    b.HasOne("CourseShop.DataLayer.Entity.Courses.CourseLevel", "CourseLevel")
-                        .WithMany("Course")
-                        .HasForeignKey("CourseLevelId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CourseShop.DataLayer.Entity.Courses.CourseStatus", "CourseStatus")
-                        .WithMany("Course")
-                        .HasForeignKey("CourseStatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CourseShop.DataLayer.Entity.Courses.CourseGroup", "CourseGroup")
-                        .WithMany("Courses")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CourseShop.DataLayer.Entity.Courses.CourseGroup", "SubGroup")
-                        .WithMany("SubCourses")
-                        .HasForeignKey("SubGroupId");
-
-                    b.HasOne("CourseShop.DataLayer.Entity.User", "User")
-                        .WithMany("Courses")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CourseShop.DataLayer.Entity.Courses.CourseEpisode", b =>
-                {
-                    b.HasOne("CourseShop.DataLayer.Entity.Courses.Course", "Course")
-                        .WithMany("CourseEpisodes")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("CourseShop.DataLayer.Entity.Courses.CourseGroup", b =>
                 {
                     b.HasOne("CourseShop.DataLayer.Entity.Courses.CourseGroup")
-                        .WithMany("CourseGroups")
+                        .WithMany("CourseGroupsCourseGroups")
                         .HasForeignKey("ParentId");
                 });
 

@@ -24,8 +24,13 @@ namespace CourseShop.DataLayer.Entity.Courses
         #region Relations
 
         [ForeignKey("ParentId")]
-        public List<CourseGroup> CourseGroupsCourseGroups { get; set; }
+        public List<CourseGroup> CourseGroups { get; set; }
 
+        [InverseProperty("CourseGroup")]
+        public List<Course> Courses { get; set; }
+
+        [InverseProperty("SubGroup")]
+        public List<Course> SubCourses { get; set; }
         #endregion
 
     }

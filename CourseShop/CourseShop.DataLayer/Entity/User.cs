@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseShop.DataLayer.Entity.Courses;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -35,8 +36,11 @@ namespace CourseShop.DataLayer.Entity
 
         #region Relations
 
+        public List<Course> Courses { get; set; }
+
         public List<UserRole> UserRoles { get; set; }
-        public virtual List<Wallet> Wallets { get; set; }
+
+        public List<Wallet> Wallets { get; set; }
 
         #endregion
     }

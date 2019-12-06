@@ -3,16 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CourseShop.DataLayer.Entity.Courses
 {
-    public class CourseLevel
+    public class CourseStatus
     {
         [Key]
-        public int CourseLevelId { get; set; }
+        public int CourseStatusId { get; set; }
 
-
-        [Display(Name = "سطح دوره")]
+        [Display(Name = "وضعیت دوره")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [MaxLength(200, ErrorMessage = "{0} نمی تواند بیشتر از {1} کاراکتر باشد .")]
-        public string CourseLevelTitle { get; set; }
+        public string CourseStatusTitle { get; set; }
 
         #region relations
 

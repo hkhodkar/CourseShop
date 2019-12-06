@@ -1,0 +1,92 @@
+﻿@page
+@model CourseShop.Web.Pages.Admin.Courses.CreateCourseModel
+@{
+    ViewData["Title"] = "ایجاد دوره جدید";
+}
+
+
+<section class="content">
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="row">
+
+            <div class="col-sm-12 col-md-8">
+
+                <div class="box box-warning">
+                    <div class="box-header ui-sortable-handle" style="cursor: move;">
+                        <i class="fa fa-user-plus"></i>
+
+                        <h3 class="box-title">ثبت کاربر</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input asp-for="Course.CourseTitle" type="text" class="form-control" placeholder="نام دوره">
+                            <span asp-validation-for="Course.CourseTitle"></span>
+                        </div>
+
+                        <div class="box-footer clearfix">
+                            <button type="submit" class=" btn btn-success">
+                                ثبت دوره
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+
+                <div class="box box-info box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">تصویر کاربر</h3>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-7 col-sm-8 col-xs-12" style="padding:8px">
+                                @*<img id="imgAvatar" name="AvatarName" class="img-thumbnail" style="padding-bottom:8px" src="/UserAvatar/default.jpg">*@
+                            </div>
+                            <div class="col-md-7 col-sm-8 col-xs-12">
+                                <div class="input-group">
+                                    @*<label for="file-upload" class="custom-file-upload" style="width : 80px">
+                                        <i class="zmdi zmdi-upload"></i>
+                                        <span>آپلود عکس</span>
+                                    </label>
+                                    <input asp-for="CreateUserViewModel.UserAvatar" id="file-upload" type="file" style="display:none">
+                                    <p>لطفا تصویری انتخاب کنید</p>*@
+                                </div>
+                            </div>
+                            <div class="col-md-7 col-sm-8 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-8">
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="box box-success box-solid">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">نقش های کاربر</h3>
+                        <!-- /.box-tools -->
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        @*@foreach (var item in Model.RolesList)
+                        {
+                            <label>@item.RoleTitle</label>
+                            <input name="Roles" type="checkbox" value="@item.RoleId" />
+                        }*@
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </form>
+
+</section>
+
