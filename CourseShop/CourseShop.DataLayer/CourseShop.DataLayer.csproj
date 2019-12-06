@@ -7,6 +7,7 @@
   <ItemGroup>
     <Compile Remove="Migrations\20191102175940_AddWalletAndWalletType.cs" />
     <Compile Remove="Migrations\20191102180718_UpdateWalletsTable.cs" />
+    <Compile Remove="Migrations\20191206081112_addCourseGroupTable.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -4,14 +4,16 @@ using CourseShop.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseShop.DataLayer.Migrations
 {
     [DbContext(typeof(CourseShopContext))]
-    partial class CourseShopContextModelSnapshot : ModelSnapshot
+    [Migration("20191206083450_SeedCourseGroup2")]
+    partial class SeedCourseGroup2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,6 +59,13 @@ namespace CourseShop.DataLayer.Migrations
                         {
                             CourseGroupId = 3,
                             CourseGroupTitle = "React Native",
+                            IsDeleted = false,
+                            ParentId = 1
+                        },
+                        new
+                        {
+                            CourseGroupId = 4,
+                            CourseGroupTitle = "زامارین Xamarin",
                             IsDeleted = false,
                             ParentId = 1
                         },

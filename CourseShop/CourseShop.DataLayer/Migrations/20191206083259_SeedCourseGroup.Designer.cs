@@ -4,14 +4,16 @@ using CourseShop.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseShop.DataLayer.Migrations
 {
     [DbContext(typeof(CourseShopContext))]
-    partial class CourseShopContextModelSnapshot : ModelSnapshot
+    [Migration("20191206083259_SeedCourseGroup")]
+    partial class SeedCourseGroup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,6 +59,13 @@ namespace CourseShop.DataLayer.Migrations
                         {
                             CourseGroupId = 3,
                             CourseGroupTitle = "React Native",
+                            IsDeleted = false,
+                            ParentId = 1
+                        },
+                        new
+                        {
+                            CourseGroupId = 4,
+                            CourseGroupTitle = "زامارین Xamarin",
                             IsDeleted = false,
                             ParentId = 1
                         },
@@ -132,21 +141,21 @@ namespace CourseShop.DataLayer.Migrations
                             CourseGroupId = 15,
                             CourseGroupTitle = "SQL Server",
                             IsDeleted = false,
-                            ParentId = 14
+                            ParentId = 13
                         },
                         new
                         {
                             CourseGroupId = 16,
                             CourseGroupTitle = "No SQL",
                             IsDeleted = false,
-                            ParentId = 14
+                            ParentId = 13
                         },
                         new
                         {
                             CourseGroupId = 17,
                             CourseGroupTitle = "My SQL",
                             IsDeleted = false,
-                            ParentId = 14
+                            ParentId = 13
                         },
                         new
                         {
@@ -159,21 +168,21 @@ namespace CourseShop.DataLayer.Migrations
                             CourseGroupId = 19,
                             CourseGroupTitle = "Bootstrap",
                             IsDeleted = false,
-                            ParentId = 18
+                            ParentId = 17
                         },
                         new
                         {
                             CourseGroupId = 20,
                             CourseGroupTitle = "JQuery",
                             IsDeleted = false,
-                            ParentId = 18
+                            ParentId = 17
                         },
                         new
                         {
                             CourseGroupId = 21,
                             CourseGroupTitle = "Java Script",
                             IsDeleted = false,
-                            ParentId = 18
+                            ParentId = 17
                         });
                 });
 

@@ -4,14 +4,16 @@ using CourseShop.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseShop.DataLayer.Migrations
 {
     [DbContext(typeof(CourseShopContext))]
-    partial class CourseShopContextModelSnapshot : ModelSnapshot
+    [Migration("20191206081533_addCourseGroupTable")]
+    partial class addCourseGroupTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,143 +40,6 @@ namespace CourseShop.DataLayer.Migrations
                     b.HasIndex("ParentId");
 
                     b.ToTable("CourseGroup");
-
-                    b.HasData(
-                        new
-                        {
-                            CourseGroupId = 1,
-                            CourseGroupTitle = "برنامه نویسی موبایل",
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            CourseGroupId = 2,
-                            CourseGroupTitle = "زامارین Xamarin",
-                            IsDeleted = false,
-                            ParentId = 1
-                        },
-                        new
-                        {
-                            CourseGroupId = 3,
-                            CourseGroupTitle = "React Native",
-                            IsDeleted = false,
-                            ParentId = 1
-                        },
-                        new
-                        {
-                            CourseGroupId = 5,
-                            CourseGroupTitle = "برنامه نویسی وب",
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            CourseGroupId = 6,
-                            CourseGroupTitle = "ASP.net WebForms",
-                            IsDeleted = false,
-                            ParentId = 5
-                        },
-                        new
-                        {
-                            CourseGroupId = 7,
-                            CourseGroupTitle = "ASP.net MVC",
-                            IsDeleted = false,
-                            ParentId = 5
-                        },
-                        new
-                        {
-                            CourseGroupId = 8,
-                            CourseGroupTitle = "PHP MVC",
-                            IsDeleted = false,
-                            ParentId = 5
-                        },
-                        new
-                        {
-                            CourseGroupId = 9,
-                            CourseGroupTitle = "ASP.net Core",
-                            IsDeleted = false,
-                            ParentId = 5
-                        },
-                        new
-                        {
-                            CourseGroupId = 10,
-                            CourseGroupTitle = "برنامه نویسی تحت ویندوز",
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            CourseGroupId = 11,
-                            CourseGroupTitle = "سی شارپ C#",
-                            IsDeleted = false,
-                            ParentId = 10
-                        },
-                        new
-                        {
-                            CourseGroupId = 12,
-                            CourseGroupTitle = "جاوا Java",
-                            IsDeleted = false,
-                            ParentId = 10
-                        },
-                        new
-                        {
-                            CourseGroupId = 13,
-                            CourseGroupTitle = "Node JS",
-                            IsDeleted = false,
-                            ParentId = 10
-                        },
-                        new
-                        {
-                            CourseGroupId = 14,
-                            CourseGroupTitle = "بانک های اطلاعاتی",
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            CourseGroupId = 15,
-                            CourseGroupTitle = "SQL Server",
-                            IsDeleted = false,
-                            ParentId = 14
-                        },
-                        new
-                        {
-                            CourseGroupId = 16,
-                            CourseGroupTitle = "No SQL",
-                            IsDeleted = false,
-                            ParentId = 14
-                        },
-                        new
-                        {
-                            CourseGroupId = 17,
-                            CourseGroupTitle = "My SQL",
-                            IsDeleted = false,
-                            ParentId = 14
-                        },
-                        new
-                        {
-                            CourseGroupId = 18,
-                            CourseGroupTitle = "طراحی سایت",
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            CourseGroupId = 19,
-                            CourseGroupTitle = "Bootstrap",
-                            IsDeleted = false,
-                            ParentId = 18
-                        },
-                        new
-                        {
-                            CourseGroupId = 20,
-                            CourseGroupTitle = "JQuery",
-                            IsDeleted = false,
-                            ParentId = 18
-                        },
-                        new
-                        {
-                            CourseGroupId = 21,
-                            CourseGroupTitle = "Java Script",
-                            IsDeleted = false,
-                            ParentId = 18
-                        });
                 });
 
             modelBuilder.Entity("CourseShop.DataLayer.Entity.Permission", b =>
